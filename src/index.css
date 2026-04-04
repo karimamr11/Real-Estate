@@ -1,0 +1,169 @@
+@import "tailwindcss";
+
+/* ===== Design Tokens ===== */
+@theme {
+  --color-bg: #FAF9F7;
+  --color-bg-dark: #1A1A18;
+  --color-text: #1A1A18;
+  --color-text-muted: #6B6B60;
+  --color-text-light: #8A8A8A;
+  --color-text-inv: #FAF9F7;
+  --color-text-inv-muted: #9A9A97;
+  --color-accent: #FAA51E;
+  --color-accent-hover: #FAD917;
+  --color-border: #AFAFAF;
+  --color-nav-bg: transparent;
+  --color-nav-bg-scroll: rgba(255, 255, 255, 0.85);
+  --color-card-bg: #F9F9F9;
+  --color-card-hover: #F0F0F0;
+
+  --font-display: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+/* ===== Reset ===== */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ===== Scrollbar ===== */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-text-muted);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-accent);
+}
+
+/* ===== Hero Text Reveal ===== */
+.hero-text-clipped {
+  font-family: var(--font-display);
+  font-weight: 700;
+  background-size: cover;
+  background-position: center;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-stroke: 2px rgba(250, 250, 250, 0.3);
+  transition: opacity 0.8s ease;
+}
+
+.hero-text-solid {
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--color-accent);
+  transition: opacity 0.8s ease;
+}
+
+.hero-subtitle-clipped {
+  font-family: var(--font-display);
+  font-weight: 300;
+  letter-spacing: 0.15em;
+  background-size: cover;
+  background-position: center;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(250, 250, 250, 0.25);
+  transition: opacity 0.8s ease;
+}
+
+.hero-subtitle-solid {
+  font-family: var(--font-display);
+  font-weight: 300;
+  letter-spacing: 0.15em;
+  color: var(--color-accent);
+  transition: opacity 0.8s ease;
+}
+
+/* ===== Parallax transitions ===== */
+.parallax-layer {
+  transition: transform 0.05s linear;
+}
+
+/* ===== Service card gold accent line ===== */
+.service-accent {
+  width: 32px;
+  height: 2px;
+  background: var(--color-accent);
+  transform: rotate(15deg);
+  margin-bottom: 25px;
+  transition: background 0.4s ease;
+}
+
+/* ===== Fade-in observer utility ===== */
+.fade-in-section {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.fade-in-section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== Service card hover ===== */
+.service-card {
+  background: var(--color-card-bg);
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+.service-card:hover {
+  background-color: var(--color-card-hover);
+}
+
+.service-card:hover .service-name,
+.service-card:hover .service-desc {
+  color: var(--color-text-inv);
+}
+
+.service-card:hover .service-desc {
+  color: var(--color-text-inv-muted);
+}
+
+/* ===== Mobile menu overlay ===== */
+.mobile-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(26, 26, 24, 0.97);
+  z-index: 99;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ===== Keyframes ===== */
+@keyframes subtle-float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes scrollBounce {
+  0%, 100% { transform: translateY(0); opacity: 1; }
+  50% { transform: translateY(12px); opacity: 0.3; }
+}
