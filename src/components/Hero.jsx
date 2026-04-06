@@ -54,26 +54,44 @@ export default function Hero() {
   const headlineVanishT = Math.min(Math.max((progress - vanishStart) / 0.10, 0), 1)
   const headlineOpacity = 1 - headlineVanishT
 
+  /* ==========================================================
+     PHASE 2  (progress 0.10 → 0.35)
+     - "THD" appears FROM THE BACK (scale 0.15 → 1.0), fixed at center
+     - Starts just before the headline fades behind the building
+     ========================================================== */
+  const thdT = Math.min(Math.max((progress - 0.10) / 0.25, 0), 1)
+  const thdE = easeOutCubic(thdT)
+  // Scale UP from 0.15 to 1.0 (dramatic back-to-front zoom effect)
+  const thdScale = 0.15 + (0.85 * thdE)
+
   // THD Wireframe Path Draw (progress 0.10 -> 0.25)
+  // Gives it plenty of time to draw completely while it zooms in
   const strokeDrawT = Math.min(Math.max((progress - 0.10) / 0.15, 0), 1)
 
-  /* ==========================================================
-     PHASE 2  (progress 0.25 → 0.55)
-     - "THD" Stencil Mask reveals
-     ========================================================== */
-  const thdT = Math.min(Math.max((progress - 0.25) / 0.30, 0), 1)
-  const thdE = easeOutCubic(thdT)
-  const thdOpacity = thdE
-  // Scale down from 1.3 to 1.0
-  const thdScale = 1.2 - (0.2 * thdE)
+  // THD solid fill only fades in AFTER wireframe finishes (progress 0.25 -> 0.35)
+  const maskFillT = Math.min(Math.max((progress - 0.25) / 0.10, 0), 1)
+  const thdOpacity = easeOutCubic(maskFillT)
 
-  // PHASE 3: THD Drops down into clouds
+  // THD stays fixed at exact center — no vertical movement
+  const thdTextYPercent = 50
+
+  // PHASE 3: THD Drops down into clouds (later in scroll)
   const dropT = Math.min(Math.max((progress - 0.70) / 0.30, 0), 1)
-  // Text starts lower down (offset by +30%), rises to center (+0%), then drops to +40% at end
-  const thdTextYPercent = 50 + (30 * (1 - thdE)) + (dropT * dropT * 40)
+  const thdTextYPercentFinal = thdTextYPercent + (dropT * dropT * 40)
 
-  // Base cloud fades in after scrolling (0.10 -> 0.40)
-  const baseCloudOpacity = Math.min(Math.max((progress - 0.10) / 0.30, 0), 1)
+  /* ==========================================================
+     PHASE 2.5 (progress 0.35 → 0.65)
+     - Base Cloud reveal: unseen until THD is fully appeared,
+     - Then it rises from bottom to up and fades in.
+     ========================================================== */
+  const cloudRevealT = Math.min(Math.max((progress - 0.35) / 0.30, 0), 1)
+  const cloudRevealE = easeOutCubic(cloudRevealT)
+  
+  const cloudOpacityMultiplier = cloudRevealE
+  const cloudYOffset = 200 * (1 - cloudRevealE) // rises from 200px below
+
+  // Side clouds appear from the very beginning of the scroll (0.00 -> 0.15)
+  const sideCloudOpacity = Math.min(progress / 0.15, 1)
 
   // Interior design subtitle starts slightly after THD is fully revealed
   const subT = Math.min(Math.max((progress - 0.45) / 0.25, 0), 1)
@@ -117,7 +135,6 @@ export default function Hero() {
             transform: `translateX(-50%) translateY(${buildingY}%) scale(${buildingScale})`,
             transformOrigin: 'bottom center',
             zIndex: 2,
-            transition: 'transform 0.06s linear',
             willChange: 'transform',
           }}
         >
@@ -158,9 +175,9 @@ export default function Hero() {
               top: '60%', // Pushed down out of the center to preserve THD contrast
               left: '-25%',
               width: '55vw',
-              opacity: 0.5,
-              transform: `translateX(${progress * 150}px)`, // Drifts less aggressively
-              transition: 'transform 0.12s linear',
+              opacity: 0.5 * sideCloudOpacity,
+              transform: `translate3d(${progress * -400}px, 0, 0)`, // Drifts noticeably to the left (outward)
+              willChange: 'transform, opacity',
             }}
           />
 
@@ -172,9 +189,9 @@ export default function Hero() {
               top: '80%', // Pushed way down
               left: '-10%',
               width: '45vw',
-              opacity: 0.4,
-              transform: `translateX(${progress * 100}px)`,
-              transition: 'transform 0.12s linear',
+              opacity: 0.4 * sideCloudOpacity,
+              transform: `translate3d(${progress * -250}px, 0, 0)`,
+              willChange: 'transform, opacity',
             }}
           />
 
@@ -186,9 +203,9 @@ export default function Hero() {
               top: '65%', // Pushed down out of the center
               right: '-25%',
               width: '55vw',
-              opacity: 0.5,
-              transform: `translateX(${progress * -150}px) scaleX(-1)`, // flipped horizontally
-              transition: 'transform 0.12s linear',
+              opacity: 0.5 * sideCloudOpacity,
+              transform: `translate3d(${progress * 400}px, 0, 0) scaleX(-1)`, // Drifts noticeably to the right (outward)
+              willChange: 'transform, opacity',
             }}
           />
 
@@ -200,9 +217,9 @@ export default function Hero() {
               top: '85%', // Pushed way down
               right: '-5%',
               width: '50vw',
-              opacity: 0.4,
-              transform: `translateX(${progress * -100}px) scaleX(-1)`,
-              transition: 'transform 0.12s linear',
+              opacity: 0.4 * sideCloudOpacity,
+              transform: `translate3d(${progress * 250}px, 0, 0) scaleX(-1)`,
+              willChange: 'transform, opacity',
             }}
           />
         </div>
@@ -229,33 +246,29 @@ export default function Hero() {
             maxWidth: '1200px',
             pointerEvents: headlineOpacity > 0 ? 'auto' : 'none',
             willChange: 'transform, opacity',
-            transition: 'transform 0.08s linear',
           }}
         >
           {/* ---- Main Headline — single line, split color effect ---- */}
           <h1
             style={{
               fontFamily: 'var(--font-display)',
-              fontSize: 'clamp(2.8rem, 6.5vw, 6.5rem)',
+              fontSize: 'clamp(2.5rem, 6vw, 6.5rem)',
               fontWeight: 800,
-              lineHeight: 1.05,
+              lineHeight: 1.1,
               letterSpacing: '-0.035em',
               marginBottom: '16px',
-              whiteSpace: 'nowrap',
             }}
           >
-            {/* "Design W" — semi-transparent, ghosted look (like reference) */}
-            <span
-              style={{
-                color: 'rgba(26, 26, 24, 0.35)',
-              }}
-            >
-              Design W
+            {/* Group words so "Design What" and "Moves You" wrap nicely on mobile */}
+            <span style={{ display: 'inline-block', whiteSpace: 'nowrap' }}>
+              <span style={{ color: 'rgba(26, 26, 24, 0.35)' }}>Design W</span>
+              <span style={{ color: '#1A1A18' }}>hat </span>
             </span>
-            {/* "hat Moves You" — solid black, italic for "Moves You" like reference */}
-            <span style={{ color: '#1A1A18' }}>hat </span>
+            {' '}
             <span
               style={{
+                display: 'inline-block',
+                whiteSpace: 'nowrap',
                 color: '#1A1A18',
                 fontStyle: 'italic',
                 fontWeight: 700,
@@ -332,15 +345,13 @@ export default function Hero() {
             ============================================================== */}
 
         {/* Step 1: Glassy white stroke wireframe that draws itself BEFORE the mask fills in */}
-        {/* Uses an isolated container that fades out exactly as the main mask bleeds in, leaving the rest of the flow completely untouched! */}
+        {/* Uses an isolated container that fades out exactly as the main mask bleeds in */}
         <div
           style={{
             position: 'absolute',
             inset: 0,
             zIndex: 11,
             pointerEvents: 'none',
-            transform: `scale(${thdScale})`,
-            transformOrigin: 'center center',
             // Fade in right after scroll starts (progress > 0.05), and fade out when the main mask begins (thdOpacity > 0)
             opacity: Math.min(Math.max((progress - 0.05) / 0.05, 0), 1) * (1 - thdOpacity), 
             display: (1 - thdOpacity) > 0 && progress > 0.01 ? 'block' : 'none'
@@ -349,12 +360,12 @@ export default function Hero() {
           <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
             <text 
               x="50%" 
-              y={`${thdTextYPercent}%`} 
+              y={`${thdTextYPercentFinal}%`} 
               textAnchor="middle" 
               dominantBaseline="central" 
               fill="none"
               stroke="rgba(255, 255, 255, 0.75)" 
-              strokeWidth="3"
+              strokeWidth={3 / thdScale}
               pathLength="100" 
               strokeDasharray="100"
               strokeDashoffset={`${100 - (strokeDrawT * 100)}`}
@@ -362,7 +373,10 @@ export default function Hero() {
                 fontFamily: 'var(--font-display)',
                 fontSize: 'clamp(7rem, 20vw, 22rem)',
                 fontWeight: 900,
-                letterSpacing: '-0.04em'
+                letterSpacing: '-0.04em',
+                transform: `scale(${thdScale})`,
+                transformOrigin: '50% 50%',
+                transformBox: 'fill-box',
               }}
             >
               THD
@@ -377,9 +391,7 @@ export default function Hero() {
             zIndex: 10,
             pointerEvents: 'none',
             opacity: thdOpacity,
-            transform: `scale(${thdScale})`,
-            transformOrigin: 'center center',
-            transition: 'opacity 0.08s linear, transform 0.08s linear',
+            transition: 'opacity 0.08s linear',
             display: thdOpacity > 0 ? 'block' : 'none'
           }}
         >
@@ -390,15 +402,19 @@ export default function Hero() {
                 <rect width="100%" height="100%" fill="white" />
                 <text
                   x="50%"
-                  y={`${thdTextYPercent}%`}
+                  y={`${thdTextYPercentFinal}%`}
                   textAnchor="middle"
                   dominantBaseline="central"
                   fill="black"
+                  opacity={1 - dropT} // The letters fade out (hole closes) as it drops
                   style={{
                     fontFamily: 'var(--font-display)',
                     fontSize: 'clamp(7rem, 20vw, 22rem)',
                     fontWeight: 900,
-                    letterSpacing: '-0.04em'
+                    letterSpacing: '-0.04em',
+                    transform: `scale(${thdScale})`,
+                    transformOrigin: '50% 50%',
+                    transformBox: 'fill-box',
                   }}
                 >
                   THD
@@ -430,9 +446,10 @@ export default function Hero() {
             bottom: '-35%', // Pushed way down below the building!
             left: '-15%',
             width: '130%',
-            opacity: baseCloudOpacity, // appears after scrolling!
-            transform: `translate3d(${-progress * 10}%, 0, 0)`, // Drifts left as you scroll
+            opacity: cloudOpacityMultiplier, // appears after scrolling!
+            transform: `translate3d(${-progress * 10}%, ${cloudYOffset}px, 0)`, // Drifts left as you scroll, and rises from bottom
             pointerEvents: 'none',
+            willChange: 'transform, opacity',
           }}>
             <img
               src="/cloud-base.png"
