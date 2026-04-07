@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 
 const navLinks = [
@@ -9,10 +9,23 @@ const navLinks = [
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
+  const [hidden, setHidden] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
+  const lastScrollY = useRef(0)
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40)
+    const onScroll = () => {
+      const currentY = window.scrollY
+      setScrolled(currentY > 40)
+
+      // Hide navbar when scrolling down, show when scrolling up
+      if (currentY > lastScrollY.current && currentY > 80) {
+        setHidden(true)
+      } else {
+        setHidden(false)
+      }
+      lastScrollY.current = currentY
+    }
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
@@ -26,31 +39,42 @@ export default function Navbar() {
   return (
     <>
       <nav
-        className="fixed top-0 left-0 w-full z-[100] transition-all duration-300"
+        className="fixed top-0 left-0 w-full z-[100] transition-all duration-500"
         style={{
           background: scrolled ? 'var(--color-nav-bg-scroll)' : 'var(--color-nav-bg)',
           backdropFilter: 'blur(16px)',
           WebkitBackdropFilter: 'blur(16px)',
           borderBottom: scrolled ? '0.5px solid rgba(0,0,0,0.08)' : 'none',
+          transform: hidden && !mobileOpen ? 'translateY(-100%)' : 'translateY(0)',
         }}
       >
-        <div className="max-w-[1400px] mx-auto px-[10vw] flex items-center justify-between h-[60px]">
+        <div className="relative max-w-[1400px] mx-auto px-[10vw] flex items-center justify-between h-[60px]">
           {/* Logo */}
           <a
             href="#hero"
-            className="no-underline text-[18px] font-bold tracking-tight pt-[2px]"
+            className="no-underline text-[24px] font-bold tracking-tight pt-[2px]"
             style={{ fontFamily: 'var(--font-display)', color: '#000000' }}
           >
             THD
           </a>
 
-          {/* Center links — desktop */}
-          <ul className="hidden md:flex items-center gap-10">
+          {/* Center links — desktop (absolutely centered) */}
+          <ul
+            className="hidden md:flex items-center gap-20 list-none"
+            style={{
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
+              margin: 0,
+              padding: 0,
+            }}
+          >
             {navLinks.map((link) => (
               <li key={link.label} className="list-none">
                 <a
                   href={link.href}
-                  className="no-underline text-[14px] font-medium tracking-wide transition-colors duration-200 hover:text-black"
+                  className="no-underline text-[17px] font-medium tracking-wide transition-colors duration-200 hover:text-black"
                   style={{ fontFamily: 'var(--font-body)', color: '#4A4A4A' }}
                 >
                   {link.label}
@@ -58,20 +82,6 @@ export default function Navbar() {
               </li>
             ))}
           </ul>
-
-          {/* Right CTA — desktop */}
-          <a
-            href="#contact"
-            className="hidden md:inline-flex items-center justify-center px-6 py-[10px] text-[14px] font-semibold no-underline transition-all duration-200 hover:opacity-80"
-            style={{
-              fontFamily: 'var(--font-body)',
-              background: '#000000',
-              color: '#FFFFFF',
-              borderRadius: '999px',
-            }}
-          >
-            Get in Touch
-          </a>
 
           {/* Hamburger — mobile */}
           <button
@@ -128,21 +138,6 @@ export default function Navbar() {
                   </a>
                 </li>
               ))}
-              <li>
-                <a
-                  href="#contact"
-                  onClick={() => setMobileOpen(false)}
-                  className="inline-block mt-4 px-8 py-3 text-[15px] font-medium no-underline"
-                  style={{
-                    fontFamily: 'var(--font-body)',
-                    background: 'var(--color-accent)',
-                    color: 'var(--color-bg-dark)',
-                    borderRadius: '999px',
-                  }}
-                >
-                  Get in Touch
-                </a>
-              </li>
             </ul>
           </motion.div>
         )}

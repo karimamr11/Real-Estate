@@ -86,18 +86,12 @@ export default function Hero() {
      ========================================================== */
   const cloudRevealT = Math.min(Math.max((progress - 0.35) / 0.30, 0), 1)
   const cloudRevealE = easeOutCubic(cloudRevealT)
-  
+
   const cloudOpacityMultiplier = cloudRevealE
   const cloudYOffset = 200 * (1 - cloudRevealE) // rises from 200px below
 
   // Side clouds appear from the very beginning of the scroll (0.00 -> 0.15)
   const sideCloudOpacity = Math.min(progress / 0.15, 1)
-
-  // Interior design subtitle starts slightly after THD is fully revealed
-  const subT = Math.min(Math.max((progress - 0.45) / 0.25, 0), 1)
-  const subE = easeOutCubic(subT)
-  const subY = 50 * (1 - subE)
-  const subOpacity = subE
 
   /* ==========================================================
      PHASE 3  (progress 0.80 → 1.0)
@@ -127,9 +121,9 @@ export default function Hero() {
         {/* Key difference vs before: MUCH larger, takes up bottom 65% of viewport,
             using a linear gradient mask on sides for soft cloud-wrap edges */}
         <div
+          className="bottom-[15%] md:bottom-0"
           style={{
             position: 'absolute',
-            bottom: 0,
             left: '50%',
             width: 'min(110vw, 1400px)',
             transform: `translateX(-50%) translateY(${buildingY}%) scale(${buildingScale})`,
@@ -261,8 +255,8 @@ export default function Hero() {
           >
             {/* Group words so "Design What" and "Moves You" wrap nicely on mobile */}
             <span style={{ display: 'inline-block', whiteSpace: 'nowrap' }}>
-              <span style={{ color: 'rgba(26, 26, 24, 0.35)' }}>Design W</span>
-              <span style={{ color: '#1A1A18' }}>hat </span>
+              <span style={{ color: 'rgba(26, 26, 24, 0.35)' }}>Designing </span>
+              <span style={{ color: 'rgba(26, 26, 24, 0.8)' }}>the </span>
             </span>
             {' '}
             <span
@@ -271,10 +265,10 @@ export default function Hero() {
                 whiteSpace: 'nowrap',
                 color: '#1A1A18',
                 fontStyle: 'italic',
-                fontWeight: 700,
+                fontWeight: 900,
               }}
             >
-              Moves You
+              Future
             </span>
           </h1>
 
@@ -353,20 +347,20 @@ export default function Hero() {
             zIndex: 11,
             pointerEvents: 'none',
             // Fade in right after scroll starts (progress > 0.05), and fade out when the main mask begins (thdOpacity > 0)
-            opacity: Math.min(Math.max((progress - 0.05) / 0.05, 0), 1) * (1 - thdOpacity), 
+            opacity: Math.min(Math.max((progress - 0.05) / 0.05, 0), 1) * (1 - thdOpacity),
             display: (1 - thdOpacity) > 0 && progress > 0.01 ? 'block' : 'none'
           }}
         >
           <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-            <text 
-              x="50%" 
-              y={`${thdTextYPercentFinal}%`} 
-              textAnchor="middle" 
-              dominantBaseline="central" 
+            <text
+              x="50%"
+              y={`${thdTextYPercentFinal - 8}%`}
+              textAnchor="middle"
+              dominantBaseline="central"
               fill="none"
-              stroke="rgba(255, 255, 255, 0.75)" 
+              stroke="rgba(255, 255, 255, 0.75)"
               strokeWidth={3 / thdScale}
-              pathLength="100" 
+              pathLength="100"
               strokeDasharray="100"
               strokeDashoffset={`${100 - (strokeDrawT * 100)}`}
               style={{
@@ -380,6 +374,29 @@ export default function Hero() {
               }}
             >
               THD
+            </text>
+            <text
+              x="50%"
+              y={`${thdTextYPercentFinal + 20}%`}
+              textAnchor="middle"
+              dominantBaseline="central"
+              fill="none"
+              stroke="rgba(255, 255, 255, 0.75)"
+              strokeWidth={1.5 / thdScale}
+              pathLength="100"
+              strokeDasharray="100"
+              strokeDashoffset={`${100 - (strokeDrawT * 100)}`}
+              style={{
+                fontFamily: 'var(--font-display)',
+                fontSize: 'clamp(1.2rem, 4vw, 4rem)',
+                fontWeight: 600,
+                letterSpacing: '0.25em',
+                transform: `scale(${thdScale})`,
+                transformOrigin: '50% 50%',
+                transformBox: 'fill-box',
+              }}
+            >
+              Studio
             </text>
           </svg>
         </div>
@@ -402,11 +419,11 @@ export default function Hero() {
                 <rect width="100%" height="100%" fill="white" />
                 <text
                   x="50%"
-                  y={`${thdTextYPercentFinal}%`}
+                  y={`${thdTextYPercentFinal - 8}%`}
                   textAnchor="middle"
                   dominantBaseline="central"
                   fill="black"
-                  opacity={1 - dropT} // The letters fade out (hole closes) as it drops
+                  opacity={1 - dropT}
                   style={{
                     fontFamily: 'var(--font-display)',
                     fontSize: 'clamp(7rem, 20vw, 22rem)',
@@ -418,6 +435,25 @@ export default function Hero() {
                   }}
                 >
                   THD
+                </text>
+                <text
+                  x="50%"
+                  y={`${thdTextYPercentFinal + 20}%`}
+                  textAnchor="middle"
+                  dominantBaseline="central"
+                  fill="black"
+                  opacity={1 - dropT}
+                  style={{
+                    fontFamily: 'var(--font-display)',
+                    fontSize: 'clamp(1.2rem, 4vw, 4rem)',
+                    fontWeight: 600,
+                    letterSpacing: '0.25em',
+                    transform: `scale(${thdScale})`,
+                    transformOrigin: '50% 50%',
+                    transformBox: 'fill-box',
+                  }}
+                >
+                  Studio
                 </text>
               </mask>
             </defs>
@@ -443,11 +479,11 @@ export default function Hero() {
         >
           <div style={{
             position: 'absolute',
-            bottom: '-35%', // Pushed way down below the building!
+            bottom: '-35%',
             left: '-15%',
             width: '130%',
-            opacity: cloudOpacityMultiplier, // appears after scrolling!
-            transform: `translate3d(${-progress * 10}%, ${cloudYOffset}px, 0)`, // Drifts left as you scroll, and rises from bottom
+            opacity: cloudOpacityMultiplier,
+            transform: `translate3d(${-progress * 10}%, ${cloudYOffset}px, 0)`,
             pointerEvents: 'none',
             willChange: 'transform, opacity',
           }}>
@@ -459,33 +495,7 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* "Interior Design" sits on top of everything */}
-        <div
-          style={{
-            position: 'absolute',
-            bottom: '15%',
-            left: '50%',
-            transform: `translateX(-50%) translateY(${subY}px)`,
-            textAlign: 'center',
-            zIndex: 15,
-            pointerEvents: 'none',
-            opacity: subOpacity,
-            display: subOpacity > 0 ? 'block' : 'none'
-          }}
-        >
-          <p
-            style={{
-              fontFamily: 'var(--font-display)',
-              fontSize: 'clamp(1rem, 3.5vw, 2.5rem)',
-              fontWeight: 600,
-              letterSpacing: '0.2em',
-              margin: 0,
-              color: '#1A1A18', // dark text to contrast on the #FAF9F7 background
-            }}
-          >
-            Interior Design
-          </p>
-        </div>
+
 
         {/* ---- Scroll indicator ---- */}
         <div
