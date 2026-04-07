@@ -16,6 +16,7 @@ const BUILDING_IMAGE = '/building.png'
 export default function Hero() {
   const sectionRef = useRef(null)
   const [progress, setProgress] = useState(0)
+  const [isMobile, setIsMobile] = useState(false)
 
   /* ---- Scroll listener → local progress 0‑1 ---- */
   const onScroll = useCallback(() => {
@@ -28,9 +29,16 @@ export default function Hero() {
   }, [])
 
   useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 768)
+    handleResize()
+    
     window.addEventListener('scroll', onScroll, { passive: true })
+    window.addEventListener('resize', handleResize)
     onScroll()
-    return () => window.removeEventListener('scroll', onScroll)
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('resize', handleResize)
+    }
   }, [onScroll])
 
   /* ==========================================================
@@ -377,7 +385,7 @@ export default function Hero() {
             </text>
             <text
               x="50%"
-              y={`${thdTextYPercentFinal + 20}%`}
+              y={`${thdTextYPercentFinal + (isMobile ? 3 : 20)}%`}
               textAnchor="middle"
               dominantBaseline="central"
               fill="none"
@@ -388,9 +396,8 @@ export default function Hero() {
               strokeDashoffset={`${100 - (strokeDrawT * 100)}`}
               style={{
                 fontFamily: 'var(--font-display)',
-                fontSize: 'clamp(1.2rem, 4vw, 4rem)',
+                fontSize: 'clamp(4rem, 10vw, 9rem)',
                 fontWeight: 600,
-                letterSpacing: '0.25em',
                 transform: `scale(${thdScale})`,
                 transformOrigin: '50% 50%',
                 transformBox: 'fill-box',
@@ -438,16 +445,15 @@ export default function Hero() {
                 </text>
                 <text
                   x="50%"
-                  y={`${thdTextYPercentFinal + 20}%`}
+                  y={`${thdTextYPercentFinal + (isMobile ? 3 : 20)}%`}
                   textAnchor="middle"
                   dominantBaseline="central"
                   fill="black"
                   opacity={1 - dropT}
                   style={{
                     fontFamily: 'var(--font-display)',
-                    fontSize: 'clamp(1.2rem, 4vw, 4rem)',
+                    fontSize: 'clamp(4rem, 10vw, 9rem)',
                     fontWeight: 600,
-                    letterSpacing: '0.25em',
                     transform: `scale(${thdScale})`,
                     transformOrigin: '50% 50%',
                     transformBox: 'fill-box',
