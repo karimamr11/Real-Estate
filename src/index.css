@@ -11,6 +11,7 @@
   --color-text-inv-muted: #9A9A97;
   --color-accent: #FAA51E;
   --color-accent-hover: #FAD917;
+  --color-brand-yellow: #E2FF00;
   --color-border: #AFAFAF;
   --color-nav-bg: transparent;
   --color-nav-bg-scroll: rgba(255, 255, 255, 0.85);
@@ -150,7 +151,7 @@ body {
 .mobile-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(26, 26, 24, 0.97);
+  background: rgba(26, 26, 24, 0.98);
   z-index: 99;
   display: flex;
   align-items: center;

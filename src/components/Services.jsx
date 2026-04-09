@@ -2,72 +2,211 @@ import { motion } from 'framer-motion'
 
 const services = [
   {
-    name: 'Residential Design',
-    desc: 'Helping you secure your dream aesthetic with flexible and comprehensive design options.',
+    number: '01',
+    title: 'Interior Design',
+    description: 'Full-scope residential and commercial interior design — from concept to completion. We craft spaces that reflect your identity.',
+    features: ['Space Planning', 'Material Selection', '3D Visualization', 'Mood Boards'],
   },
   {
-    name: 'Custom Furniture',
-    desc: 'Let us handle the details of bespoke craftsmanship so you can enjoy the rewards.',
+    number: '02',
+    title: 'Architecture',
+    description: 'Architectural design that pushes boundaries. Structures that stand as statements of innovation and precision.',
+    features: ['Conceptual Design', 'Technical Drawings', 'Building Permits', 'Site Supervision'],
   },
   {
-    name: 'Project Management',
-    desc: 'Guiding you through the intricacies of building and executing spaces with expert insight and support.',
+    number: '03',
+    title: 'Project Management',
+    description: "End-to-end coordination of your build. We manage timelines, budgets, and contractors — so you don't have to.",
+    features: ['Budget Control', 'Timeline Management', 'Vendor Coordination', 'Quality Assurance'],
+  },
+  {
+    number: '04',
+    title: 'Custom Furniture',
+    description: 'Bespoke furniture tailored to your space. Every piece is designed, prototyped, and crafted with precision.',
+    features: ['Custom Pieces', 'Material Sourcing', 'Prototyping', 'Installation'],
   },
 ]
 
 export default function Services() {
   return (
-    <section id="services" className="py-24 md:py-40 bg-[#FFFFFF]">
-      <div className="max-w-[1400px] mx-auto px-[5vw]">
-        
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24">
-          
-          {/* Header Area */}
-          <div className="lg:col-span-5">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.6 }}
+    <section
+      id="services"
+      style={{
+        background: '#0A0A09',
+        padding: '120px 0 140px',
+        position: 'relative',
+        overflow: 'hidden',
+      }}
+    >
+      {/* Decorative glow */}
+      <div
+        style={{
+          position: 'absolute',
+          top: '-200px',
+          right: '-200px',
+          width: '600px',
+          height: '600px',
+          borderRadius: '50%',
+          background: 'radial-gradient(circle, rgba(226,255,0,0.04) 0%, transparent 70%)',
+          pointerEvents: 'none',
+        }}
+      />
+
+      <div style={{ maxWidth: '1400px', margin: '0 auto', padding: '0 5vw', position: 'relative' }}>
+        {/* Section Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-80px' }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          style={{ marginBottom: '80px' }}
+        >
+          <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '24px' }}>
+            <div
+              style={{
+                width: '40px',
+                height: '2px',
+                background: 'var(--color-brand-yellow)',
+              }}
+            />
+            <span
+              style={{
+                fontFamily: 'var(--font-body)',
+                fontSize: '14px',
+                fontWeight: 600,
+                letterSpacing: '0.15em',
+                textTransform: 'uppercase',
+                color: 'var(--color-brand-yellow)',
+              }}
             >
-              <h2 className="text-[32px] md:text-[48px] font-bold leading-[1.1] tracking-tight text-black mb-6" style={{ fontFamily: 'var(--font-display)' }}>
-                Support Beyond Design and Build.
-              </h2>
-              <p className="text-[18px] text-gray-500 leading-relaxed mb-10" style={{ fontFamily: 'var(--font-body)' }}>
-                The design world never stands still — and neither do we. Our experts offer continued support beyond the execution, helping you maximize your space.
-              </p>
-              <a
-                href="#services-detail"
-                className="inline-flex items-center text-black font-semibold text-[15px] border-b border-black pb-1 hover:text-gray-500 hover:border-gray-500 transition-colors"
+              What We Do
+            </span>
+          </div>
+          <h2
+            style={{
+              fontFamily: 'var(--font-display)',
+              fontSize: 'clamp(36px, 5vw, 72px)',
+              fontWeight: 800,
+              lineHeight: 1.05,
+              letterSpacing: '-0.03em',
+              color: '#FFFFFF',
+              margin: 0,
+              maxWidth: '700px',
+            }}
+          >
+            Services built for{' '}
+            <span style={{ color: 'var(--color-brand-yellow)' }}>vision</span>.
+          </h2>
+        </motion.div>
+
+        {/* Services List */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
+          {services.map((service, index) => (
+            <motion.div
+              key={service.number}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-60px' }}
+              transition={{ duration: 0.6, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
+              style={{
+                borderTop: '1px solid rgba(255,255,255,0.08)',
+                padding: '48px 0',
+                display: 'grid',
+                gridTemplateColumns: '1fr',
+                gap: '24px',
+                cursor: 'pointer',
+                transition: 'background 0.3s ease',
+              }}
+              className="services-row"
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = 'rgba(226,255,0,0.03)'
+                const num = e.currentTarget.querySelector('.service-num')
+                if (num) num.style.color = 'var(--color-brand-yellow)'
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = 'transparent'
+                const num = e.currentTarget.querySelector('.service-num')
+                if (num) num.style.color = '#3A3A35'
+              }}
+            >
+              <div
+                style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'auto 1fr',
+                  gap: '32px',
+                  alignItems: 'start',
+                }}
               >
-                Discover Our Services
-              </a>
-            </motion.div>
-          </div>
-
-          {/* Grid Area */}
-          <div className="lg:col-span-7">
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
-              {services.map((service, index) => (
-                <motion.div
-                  key={service.name}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-100px" }}
-                  transition={{ duration: 0.6, delay: 0.1 * index }}
-                  className="pt-6 border-t border-gray-200"
+                {/* Number */}
+                <span
+                  className="service-num"
+                  style={{
+                    fontFamily: 'var(--font-display)',
+                    fontSize: '48px',
+                    fontWeight: 800,
+                    color: '#3A3A35',
+                    lineHeight: 1,
+                    transition: 'color 0.3s ease',
+                    minWidth: '80px',
+                  }}
                 >
-                  <h3 className="text-[20px] font-bold text-black mb-4" style={{ fontFamily: 'var(--font-display)' }}>
-                    {service.name}
-                  </h3>
-                  <p className="text-[15px] text-gray-500 leading-relaxed" style={{ fontFamily: 'var(--font-body)' }}>
-                    {service.desc}
-                  </p>
-                </motion.div>
-              ))}
-            </div>
-          </div>
+                  {service.number}
+                </span>
 
+                {/* Content */}
+                <div>
+                  <h3
+                    style={{
+                      fontFamily: 'var(--font-display)',
+                      fontSize: 'clamp(24px, 3vw, 36px)',
+                      fontWeight: 700,
+                      color: '#FFFFFF',
+                      margin: '0 0 12px 0',
+                      letterSpacing: '-0.02em',
+                    }}
+                  >
+                    {service.title}
+                  </h3>
+                  <p
+                    style={{
+                      fontFamily: 'var(--font-body)',
+                      fontSize: '16px',
+                      lineHeight: 1.7,
+                      color: '#9A9A97',
+                      margin: '0 0 24px 0',
+                      maxWidth: '600px',
+                    }}
+                  >
+                    {service.description}
+                  </p>
+
+                  {/* Feature tags */}
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+                    {service.features.map((feature) => (
+                      <span
+                        key={feature}
+                        style={{
+                          fontFamily: 'var(--font-body)',
+                          fontSize: '12px',
+                          fontWeight: 500,
+                          color: '#6B6B60',
+                          background: 'rgba(255,255,255,0.05)',
+                          border: '1px solid rgba(255,255,255,0.06)',
+                          borderRadius: '999px',
+                          padding: '6px 14px',
+                          letterSpacing: '0.03em',
+                        }}
+                      >
+                        {feature}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+          {/* Bottom border */}
+          <div style={{ borderTop: '1px solid rgba(255,255,255,0.08)' }} />
         </div>
       </div>
     </section>

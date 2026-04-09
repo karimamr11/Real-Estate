@@ -31,7 +31,7 @@ export default function Hero() {
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 768)
     handleResize()
-    
+
     window.addEventListener('scroll', onScroll, { passive: true })
     window.addEventListener('resize', handleResize)
     onScroll()

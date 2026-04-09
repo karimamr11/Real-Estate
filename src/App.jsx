@@ -1,22 +1,20 @@
 import './App.css'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
-import About from './components/About'
-import Testimonials from './components/Testimonials'
+import Projects from './components/Projects'
 import Services from './components/Services'
-import Blog from './components/Blog'
+import About from './components/About'
 import Footer from './components/Footer'
 
 function App() {
   return (
-    <div style={{ background: 'var(--color-bg)' }}>
+    <div style={{ background: '#111110' }}>
       <Navbar />
       <main>
         <Hero />
-        <About />
-        <Testimonials />
+        <Projects />
         <Services />
-        <Blog />
+        <About />
       </main>
       <Footer />
     </div>
