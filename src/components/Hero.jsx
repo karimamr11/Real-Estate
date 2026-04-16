@@ -360,51 +360,50 @@ export default function Hero() {
           }}
         >
           <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-            <text
-              x="50%"
-              y={`${thdTextYPercentFinal - 8}%`}
-              textAnchor="middle"
-              dominantBaseline="central"
-              fill="none"
-              stroke="rgba(255, 255, 255, 0.75)"
-              strokeWidth={3 / thdScale}
-              pathLength="100"
-              strokeDasharray="100"
-              strokeDashoffset={`${100 - (strokeDrawT * 100)}`}
-              style={{
-                fontFamily: 'var(--font-display)',
-                fontSize: 'clamp(7rem, 20vw, 22rem)',
-                fontWeight: 900,
-                letterSpacing: '-0.04em',
-                transform: `scale(${thdScale})`,
-                transformOrigin: '50% 50%',
-                transformBox: 'fill-box',
-              }}
-            >
-              THD
-            </text>
-            <text
-              x="50%"
-              y={`${thdTextYPercentFinal + (isMobile ? 3 : 20)}%`}
-              textAnchor="middle"
-              dominantBaseline="central"
-              fill="none"
-              stroke="rgba(255, 255, 255, 0.75)"
-              strokeWidth={1.5 / thdScale}
-              pathLength="100"
-              strokeDasharray="100"
-              strokeDashoffset={`${100 - (strokeDrawT * 100)}`}
-              style={{
-                fontFamily: 'var(--font-display)',
-                fontSize: 'clamp(4rem, 10vw, 9rem)',
-                fontWeight: 600,
-                transform: `scale(${thdScale})`,
-                transformOrigin: '50% 50%',
-                transformBox: 'fill-box',
-              }}
-            >
-              Studio
-            </text>
+            <g style={{
+              transform: `scale(${thdScale})`,
+              transformOrigin: '50% 50%',
+            }}>
+              <text
+                x="50%"
+                y={`${thdTextYPercentFinal - 8}%`}
+                textAnchor="middle"
+                dominantBaseline="central"
+                fill="none"
+                stroke="rgba(255, 255, 255, 0.75)"
+                strokeWidth={3 / thdScale}
+                pathLength="100"
+                strokeDasharray="100"
+                strokeDashoffset={`${100 - (strokeDrawT * 100)}`}
+                style={{
+                  fontFamily: 'var(--font-display)',
+                  fontSize: 'clamp(7rem, 20vw, 22rem)',
+                  fontWeight: 900,
+                  letterSpacing: '-0.04em',
+                }}
+              >
+                THD
+              </text>
+              <text
+                x="50%"
+                y={`${thdTextYPercentFinal + (isMobile ? 3 : 20)}%`}
+                textAnchor="middle"
+                dominantBaseline="central"
+                fill="none"
+                stroke="rgba(255, 255, 255, 0.75)"
+                strokeWidth={1.5 / thdScale}
+                pathLength="100"
+                strokeDasharray="100"
+                strokeDashoffset={`${100 - (strokeDrawT * 100)}`}
+                style={{
+                  fontFamily: 'var(--font-display)',
+                  fontSize: 'clamp(4rem, 10vw, 9rem)',
+                  fontWeight: 600,
+                }}
+              >
+                Studio
+              </text>
+            </g>
           </svg>
         </div>
 
@@ -424,43 +423,42 @@ export default function Hero() {
             <defs>
               <mask id="thd-stencil">
                 <rect width="100%" height="100%" fill="white" />
-                <text
-                  x="50%"
-                  y={`${thdTextYPercentFinal - 8}%`}
-                  textAnchor="middle"
-                  dominantBaseline="central"
-                  fill="black"
-                  opacity={1 - dropT}
-                  style={{
-                    fontFamily: 'var(--font-display)',
-                    fontSize: 'clamp(7rem, 20vw, 22rem)',
-                    fontWeight: 900,
-                    letterSpacing: '-0.04em',
-                    transform: `scale(${thdScale})`,
-                    transformOrigin: '50% 50%',
-                    transformBox: 'fill-box',
-                  }}
-                >
-                  THD
-                </text>
-                <text
-                  x="50%"
-                  y={`${thdTextYPercentFinal + (isMobile ? 3 : 20)}%`}
-                  textAnchor="middle"
-                  dominantBaseline="central"
-                  fill="black"
-                  opacity={1 - dropT}
-                  style={{
-                    fontFamily: 'var(--font-display)',
-                    fontSize: 'clamp(4rem, 10vw, 9rem)',
-                    fontWeight: 600,
-                    transform: `scale(${thdScale})`,
-                    transformOrigin: '50% 50%',
-                    transformBox: 'fill-box',
-                  }}
-                >
-                  Studio
-                </text>
+                <g style={{
+                  transform: `scale(${thdScale})`,
+                  transformOrigin: '50% 50%',
+                }}>
+                  <text
+                    x="50%"
+                    y={`${thdTextYPercentFinal - 8}%`}
+                    textAnchor="middle"
+                    dominantBaseline="central"
+                    fill="black"
+                    opacity={1 - dropT}
+                    style={{
+                      fontFamily: 'var(--font-display)',
+                      fontSize: 'clamp(7rem, 20vw, 22rem)',
+                      fontWeight: 900,
+                      letterSpacing: '-0.04em',
+                    }}
+                  >
+                    THD
+                  </text>
+                  <text
+                    x="50%"
+                    y={`${thdTextYPercentFinal + (isMobile ? 3 : 20)}%`}
+                    textAnchor="middle"
+                    dominantBaseline="central"
+                    fill="black"
+                    opacity={1 - dropT}
+                    style={{
+                      fontFamily: 'var(--font-display)',
+                      fontSize: 'clamp(4rem, 10vw, 9rem)',
+                      fontWeight: 600,
+                    }}
+                  >
+                    Studio
+                  </text>
+                </g>
               </mask>
             </defs>
             {/* The background image that covers the building/clouds outside the letters */}
