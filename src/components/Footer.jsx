@@ -42,7 +42,7 @@ export default function Footer() {
         }}>
           <span>
             Powered by{' '}
-            <span style={{ color: '#60A5FA', fontWeight: 600 }}>Nilebyte</span>
+            <a href="https://nilebyte.info" target="_blank" rel="noopener noreferrer" style={{ color: '#60A5FA', fontWeight: 600, textDecoration: 'none' }}>Nilebyte</a>
           </span>
           
           <span style={{ 

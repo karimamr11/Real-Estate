@@ -75,15 +75,19 @@ export default function Navbar() {
               <li key={link.label} className="list-none">
                 <a
                   href={link.href}
-                  className="no-underline text-[19px] font-medium tracking-wide transition-colors duration-200"
+                  className="group relative no-underline text-[19px] font-medium tracking-wide transition-colors duration-300"
                   style={{
                     fontFamily: 'var(--font-body)',
                     color: '#9A9A97'
                   }}
-                  onMouseEnter={(e) => { e.currentTarget.style.color = 'var(--color-brand-yellow)' }}
+                  onMouseEnter={(e) => { e.currentTarget.style.color = '#FFFFFF' }}
                   onMouseLeave={(e) => { e.currentTarget.style.color = '#9A9A97' }}
                 >
                   {link.label}
+                  <span 
+                    className="absolute bottom-[-8px] left-1/2 -translate-x-1/2 w-4 h-[2px] transition-all duration-300 group-hover:w-full"
+                    style={{ background: 'var(--color-brand-yellow)' }}
+                  />
                 </a>
               </li>
             ))}
@@ -137,12 +141,16 @@ export default function Navbar() {
                   <a
                     href={link.href}
                     onClick={() => setMobileOpen(false)}
-                    className="no-underline text-[28px] font-light tracking-wide transition-colors duration-200"
+                    className="group relative no-underline text-[28px] font-light tracking-wide transition-colors duration-200"
                     style={{ fontFamily: 'var(--font-display)', color: 'var(--color-text-inv)' }}
-                    onMouseEnter={(e) => { e.currentTarget.style.color = 'var(--color-brand-yellow)' }}
+                    onMouseEnter={(e) => { e.currentTarget.style.color = '#FFFFFF' }}
                     onMouseLeave={(e) => { e.currentTarget.style.color = 'var(--color-text-inv)' }}
                   >
                     {link.label}
+                    <span 
+                      className="absolute bottom-[-4px] left-1/2 -translate-x-1/2 w-8 h-[2px] transition-all duration-300 group-hover:w-full"
+                      style={{ background: 'var(--color-brand-yellow)' }}
+                    />
                   </a>
                 </li>
               ))}
