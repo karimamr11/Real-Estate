@@ -1,5 +1,21 @@
-import { motion } from 'framer-motion'
-import { useState, useEffect } from 'react'
+import { motion, useMotionValue, useTransform, animate, useInView } from 'framer-motion'
+import { useState, useEffect, useRef } from 'react'
+
+function Counter({ from = 0, to }) {
+  const count = useMotionValue(from)
+  const rounded = useTransform(count, (latest) => Math.round(latest))
+  const ref = useRef(null)
+  const inView = useInView(ref, { once: true, margin: '-50px' })
+
+  useEffect(() => {
+    if (inView) {
+      const controls = animate(count, to, { duration: 2, ease: 'easeOut' })
+      return controls.stop
+    }
+  }, [inView, count, to])
+
+  return <motion.span ref={ref}>{rounded}</motion.span>
+}
 
 const stats = [
   { number: '200+', label: 'Projects Completed' },
@@ -260,7 +276,7 @@ export default function About() {
                     letterSpacing: '-0.03em',
                   }}
                 >
-                  {stat.number.replace('+', '')}
+                  <Counter from={0} to={parseInt(stat.number.replace('+', ''))} />
                   {stat.number.includes('+') && <span style={{ color: 'var(--color-brand-yellow)' }}>+</span>}
                 </div>
                 <div
@@ -369,7 +385,7 @@ export default function About() {
                   if (iconwrap) iconwrap.style.color = '#FFFFFF'
                 }}
               >
-                <div 
+                <div
                   className="contact-icon"
                   style={{
                     display: 'flex',
@@ -386,7 +402,7 @@ export default function About() {
                 >
                   {contact.icon}
                 </div>
-                
+
                 <h4 style={{ fontFamily: 'var(--font-display)', fontSize: '20px', fontWeight: 700, color: '#FFFFFF', marginBottom: '12px', letterSpacing: '0.01em' }}>
                   {contact.title}
                 </h4>
