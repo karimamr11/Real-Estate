@@ -263,7 +263,7 @@ export default function Hero() {
           >
             {/* Group words so "Design What" and "Moves You" wrap nicely on mobile */}
             <span style={{ display: 'inline-block', whiteSpace: 'nowrap' }}>
-              <span style={{ color: 'rgba(26, 26, 24, 0.35)' }}>Designing </span>
+              <span style={{ color: 'rgba(26, 26, 24, 0.6)' }}>Designing </span>
               <span style={{ color: 'rgba(26, 26, 24, 0.8)' }}>the </span>
             </span>
             {' '}
@@ -272,7 +272,6 @@ export default function Hero() {
                 display: 'inline-block',
                 whiteSpace: 'nowrap',
                 color: '#1A1A18',
-                fontStyle: 'italic',
                 fontWeight: 900,
               }}
             >
@@ -293,7 +292,7 @@ export default function Hero() {
             <span style={{ fontWeight: 600, color: '#1A1A18' }}>
               Expert spaces. Real craftsmanship.
             </span>{' '}
-            <span style={{ color: '#8A8A80' }}>
+            <span style={{ color: '#4A4A45', fontWeight: 500 }}>
               A clear path to find what's next.
             </span>
           </p>
@@ -315,15 +314,16 @@ export default function Hero() {
               fontWeight: 500,
               textDecoration: 'none',
               letterSpacing: '0.02em',
+              boxShadow: '0 0 16px rgba(226, 255, 0, 0.45)',
               transition: 'transform 0.2s ease, box-shadow 0.2s ease',
             }}
             onMouseEnter={(e) => {
               e.currentTarget.style.transform = 'translateY(-1px)'
-              e.currentTarget.style.boxShadow = '0 4px 14px rgba(0,0,0,0.12)'
+              e.currentTarget.style.boxShadow = '0 0 24px rgba(226, 255, 0, 0.7)'
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.transform = 'translateY(0)'
-              e.currentTarget.style.boxShadow = 'none'
+              e.currentTarget.style.boxShadow = '0 0 16px rgba(226, 255, 0, 0.45)'
             }}
           >
             Explore Our Work{' '}
@@ -332,8 +332,8 @@ export default function Hero() {
               height="14"
               viewBox="0 0 24 24"
               fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
+              stroke="var(--color-brand-yellow)"
+              strokeWidth="2.5"
               strokeLinecap="round"
               strokeLinejoin="round"
             >
