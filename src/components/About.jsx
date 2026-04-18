@@ -26,7 +26,7 @@ const stats = [
 const socials = [
   {
     name: 'Instagram',
-    url: 'https://instagram.com',
+    url: 'https://www.instagram.com/thdstudio.eg/',
     color: '#E1306C',
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -38,7 +38,7 @@ const socials = [
   },
   {
     name: 'LinkedIn',
-    url: 'https://linkedin.com',
+    url: 'https://www.linkedin.com/company/thdstudio/',
     color: '#0077B5',
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
@@ -48,7 +48,7 @@ const socials = [
   },
   {
     name: 'Facebook',
-    url: 'https://facebook.com',
+    url: 'https://www.facebook.com/profile.php?id=100064107966174',
     color: '#1877F2',
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
@@ -61,8 +61,8 @@ const socials = [
 const contacts = [
   {
     title: 'Location',
-    line1: '123 Design Avenue',
-    line2: 'Creative District, NY 10001',
+    line1: 'New Cairo',
+    line2: 'Cairo, Egypt',
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
@@ -72,7 +72,7 @@ const contacts = [
   },
   {
     title: 'Phone',
-    line1: '+1 (555) 123-4567',
+    line1: '010 06224062',
     line2: 'Mon-Fri, 9am - 6pm',
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -82,8 +82,8 @@ const contacts = [
   },
   {
     title: 'Email',
-    line1: 'hello@thdstudio.com',
-    line2: 'info@thdstudio.com',
+    line1: 'Hello@THDstudio.net',
+    line2: '',
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />

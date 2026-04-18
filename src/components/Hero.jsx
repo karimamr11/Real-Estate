@@ -105,8 +105,8 @@ export default function Hero() {
      PHASE 3  (progress 0.80 → 1.0)
      - THD text transitions from outlined → solid white
      ========================================================== */
-  const solidT = Math.min(Math.max((progress - 0.80) / 0.20, 0), 1)
-  const solidE = easeInOutCubic(solidT)
+  // const solidT = Math.min(Math.max((progress - 0.80) / 0.20, 0), 1)
+  // const solidE = easeInOutCubic(solidT)
 
   return (
     <section
@@ -263,15 +263,15 @@ export default function Hero() {
           >
             {/* Group words so "Design What" and "Moves You" wrap nicely on mobile */}
             <span style={{ display: 'inline-block', whiteSpace: 'nowrap' }}>
-              <span style={{ color: 'rgba(26, 26, 24, 0.6)' }}>Designing </span>
-              <span style={{ color: 'rgba(26, 26, 24, 0.8)' }}>the </span>
+              <span style={{ color: 'rgba(255, 255, 255, 0.8)' }}>Designing </span>
+              <span style={{ color: 'rgba(255, 255, 255, 0.9)' }}>the </span>
             </span>
             {' '}
             <span
               style={{
                 display: 'inline-block',
                 whiteSpace: 'nowrap',
-                color: '#1A1A18',
+                color: 'var(--color-brand-yellow)',
                 fontWeight: 900,
               }}
             >
@@ -289,10 +289,10 @@ export default function Hero() {
               margin: '0 auto 24px',
             }}
           >
-            <span style={{ fontWeight: 600, color: '#1A1A18' }}>
+            <span style={{ fontWeight: 600, color: 'rgba(255, 255, 255, 0.95)' }}>
               Expert spaces. Real craftsmanship.
             </span>{' '}
-            <span style={{ color: '#4A4A45', fontWeight: 500 }}>
+            <span style={{ color: 'rgba(255, 255, 255, 0.7)', fontWeight: 500 }}>
               A clear path to find what's next.
             </span>
           </p>
@@ -463,6 +463,43 @@ export default function Hero() {
             </defs>
             {/* The background image that covers the building/clouds outside the letters */}
             <image href="/hero-bg.png" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" mask="url(#thd-stencil)" />
+            
+            {/* PHASE 3 Solid fill text */}
+            <g style={{
+              transform: `scale(${thdScale})`,
+              transformOrigin: '50% 50%',
+              opacity: 1 - dropT, // Full color immediately, fades out as it drops into clouds
+            }}>
+              <text
+                x="50%"
+                y={`${thdTextYPercentFinal - 8}%`}
+                textAnchor="middle"
+                dominantBaseline="central"
+                fill="#FFFFFF"
+                style={{
+                  fontFamily: 'var(--font-display)',
+                  fontSize: 'clamp(7rem, 20vw, 22rem)',
+                  fontWeight: 900,
+                  letterSpacing: '-0.04em',
+                }}
+              >
+                THD
+              </text>
+              <text
+                x="50%"
+                y={`${thdTextYPercentFinal + (isMobile ? 3 : 20)}%`}
+                textAnchor="middle"
+                dominantBaseline="central"
+                fill="var(--color-brand-yellow)"
+                style={{
+                  fontFamily: 'var(--font-display)',
+                  fontSize: 'clamp(4rem, 10vw, 9rem)',
+                  fontWeight: 600,
+                }}
+              >
+                Studio
+              </text>
+            </g>
           </svg>
         </div>
 
