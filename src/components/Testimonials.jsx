@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 
 const testimonials = [
   {
-    quote: "Working with THD was an absolute pleasure. From the start, their design problem-solving skills stood out. Thank you for making this happen—we are truly happy in our new home!",
+    quote: "Working with NileByte was an absolute pleasure. From the start, their design problem-solving skills stood out. Thank you for making this happen—we are truly happy with our new website!",
     author: "Mathew S."
   },
   {

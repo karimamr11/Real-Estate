@@ -61,10 +61,7 @@ export default function Navbar() {
               color: '#FFFFFF'
             }}
           >
-            THD <span style={{
-              color: 'var(--color-brand-yellow)',
-              marginLeft: '4px'
-            }}>Studio</span>
+            NileByte
           </a>
 
           <ul

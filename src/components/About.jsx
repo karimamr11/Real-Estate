@@ -18,15 +18,15 @@ function Counter({ from = 0, to }) {
 }
 
 const stats = [
-  { number: '200+', label: 'Projects Completed' },
-  { number: '15+', label: 'Years Experience' },
-  { number: '50+', label: 'Trusted Partners' },
+  { number: '500+', label: 'Websites Launched' },
+  { number: '10+', label: 'Years Experience' },
+  { number: '120+', label: 'Global Clients' },
 ]
 
 const socials = [
   {
     name: 'Instagram',
-    url: 'https://www.instagram.com/thdstudio.eg/',
+    url: 'https://www.instagram.com/nilebyte/',
     color: '#E1306C',
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -38,7 +38,7 @@ const socials = [
   },
   {
     name: 'LinkedIn',
-    url: 'https://www.linkedin.com/company/thdstudio/',
+    url: 'https://www.linkedin.com/company/nilebyte/',
     color: '#0077B5',
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
@@ -48,7 +48,7 @@ const socials = [
   },
   {
     name: 'Facebook',
-    url: 'https://www.facebook.com/profile.php?id=100064107966174',
+    url: 'https://www.facebook.com/nilebyte/',
     color: '#1877F2',
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
@@ -82,7 +82,7 @@ const contacts = [
   },
   {
     title: 'Email',
-    line1: 'Hello@THDstudio.net',
+    line1: 'hello@nilebyte.com',
     line2: '',
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -183,10 +183,10 @@ export default function About() {
                 wordBreak: 'break-word',
               }}
             >
-              We don't just design spaces.
+              We don't just build websites.
               <br />
               We craft{' '}
-              <span style={{ color: 'var(--color-brand-yellow)' }}>experiences</span>.
+              <span style={{ color: 'var(--color-brand-yellow)' }}>digital experiences</span>.
             </h2>
             <p
               style={{
@@ -198,9 +198,9 @@ export default function About() {
                 fontWeight: 400,
               }}
             >
-              THD Studio is a full-service interior design and architecture firm.
-              We transform environments into stories — spaces that move people,
-              inspire action, and stand the test of time.
+              NileByte is a full-service web design and development agency.
+              We transform ideas into stunning digital products — websites that captivate users,
+              drive growth, and stand the test of time.
             </p>
           </div>
 
@@ -216,25 +216,23 @@ export default function About() {
             }}
           >
             <div style={{
-              padding: '24px',
-              background: 'rgba(255,255,255,0.01)',
+              padding: '48px',
+              background: 'linear-gradient(145deg, rgba(226,255,0,0.08), rgba(226,255,0,0.02))',
               borderRadius: '28px',
-              border: '1px solid rgba(255,255,255,0.05)',
+              border: '1px solid rgba(226,255,0,0.15)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               boxShadow: '0 20px 40px rgba(0,0,0,0.2)',
             }}>
-              <img
-                src="/THD Studio LOGO-Light.jpg"
-                alt="THD Studio Logo"
-                style={{
-                  width: '100%',
-                  height: 'auto',
-                  borderRadius: '16px',
-                  filter: 'drop-shadow(0 0 30px rgba(226, 255, 0, 0.1))',
-                }}
-              />
+              <span style={{
+                fontFamily: 'var(--font-display)',
+                fontSize: 'clamp(36px, 5vw, 56px)',
+                fontWeight: 900,
+                color: '#FFFFFF',
+                letterSpacing: '-0.04em',
+                textAlign: 'center',
+              }}>Nile<span style={{ color: 'var(--color-brand-yellow)' }}>Byte</span></span>
             </div>
           </motion.div>
         </motion.div>

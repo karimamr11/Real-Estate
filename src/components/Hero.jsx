@@ -259,43 +259,19 @@ export default function Hero() {
               lineHeight: 1.1,
               letterSpacing: '-0.035em',
               marginBottom: '16px',
+              color: '#FFFFFF',
             }}
           >
-            {/* Group words so "Design What" and "Moves You" wrap nicely on mobile */}
-            <span style={{ display: 'inline-block', whiteSpace: 'nowrap' }}>
-              <span style={{ color: 'rgba(255, 255, 255, 0.8)' }}>Designing </span>
-              <span style={{ color: 'rgba(255, 255, 255, 0.9)' }}>the </span>
-            </span>
-            {' '}
+            Design your{' '}
             <span
               style={{
-                display: 'inline-block',
-                whiteSpace: 'nowrap',
                 color: 'var(--color-brand-yellow)',
                 fontWeight: 900,
               }}
             >
-              Future
+              futuristic website
             </span>
           </h1>
-
-          {/* ---- Subtitle ---- */}
-          <p
-            style={{
-              fontFamily: 'var(--font-body)',
-              fontSize: 'clamp(14px, 1.4vw, 17px)',
-              lineHeight: 1.65,
-              maxWidth: '480px',
-              margin: '0 auto 24px',
-            }}
-          >
-            <span style={{ fontWeight: 600, color: 'rgba(255, 255, 255, 0.95)' }}>
-              Expert spaces. Real craftsmanship.
-            </span>{' '}
-            <span style={{ color: 'rgba(255, 255, 255, 0.7)', fontWeight: 500 }}>
-              A clear path to find what's next.
-            </span>
-          </p>
 
           {/* ---- CTA Button — smaller, pill-shaped, like reference ---- */}
           <a
@@ -382,7 +358,7 @@ export default function Hero() {
                   letterSpacing: '-0.04em',
                 }}
               >
-                THD
+                NileByte
               </text>
               <text
                 x="50%"
@@ -401,7 +377,7 @@ export default function Hero() {
                   fontWeight: 600,
                 }}
               >
-                Studio
+                Intelligence
               </text>
             </g>
           </svg>
@@ -441,7 +417,7 @@ export default function Hero() {
                       letterSpacing: '-0.04em',
                     }}
                   >
-                    THD
+                    NileByte
                   </text>
                   <text
                     x="50%"
@@ -456,7 +432,7 @@ export default function Hero() {
                       fontWeight: 600,
                     }}
                   >
-                    Studio
+                    Intelligence
                   </text>
                 </g>
               </mask>
@@ -483,7 +459,7 @@ export default function Hero() {
                   letterSpacing: '-0.04em',
                 }}
               >
-                THD
+                NileByte
               </text>
               <text
                 x="50%"
@@ -497,7 +473,7 @@ export default function Hero() {
                   fontWeight: 600,
                 }}
               >
-                Studio
+                Intelligence
               </text>
             </g>
           </svg>
