@@ -69,8 +69,8 @@ export default function ShowcaseVideo() {
             <iframe
               width="100%"
               height="100%"
-              src="https://www.youtube.com/embed/tUruBw0iBv0?autoplay=1&mute=1&loop=1&playlist=tUruBw0iBv0&controls=1&showinfo=0&rel=0"
-              title="Lumina Penthouse Virtual Tour"
+              src="https://www.youtube.com/embed/PpeE86P9TnA?autoplay=1&mute=1&loop=1&playlist=PpeE86P9TnA&controls=1&showinfo=0&rel=0"
+              title="Real Estate Showcase Video"
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowFullScreen

@@ -412,7 +412,7 @@ export default function Hero() {
             </defs>
             {/* The background image that covers the building/clouds outside the letters */}
             <image href="/hero-bg.png" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" mask="url(#thd-stencil)" />
-            
+
             {/* PHASE 3 Solid fill text */}
             <g style={{
               transform: `scale(${thdScale})`,
