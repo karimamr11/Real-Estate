@@ -1,503 +1,687 @@
-import { motion, useMotionValue, useTransform, animate, useInView } from 'framer-motion'
-import { useState, useEffect, useRef } from 'react'
+import { useEffect, useState } from 'react'
 
-function Counter({ from = 0, to }) {
-  const count = useMotionValue(from)
-  const rounded = useTransform(count, (latest) => Math.round(latest))
-  const ref = useRef(null)
-  const inView = useInView(ref, { once: true, margin: '-50px' })
+export default function About() {
+  const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
-    if (inView) {
-      const controls = animate(count, to, { duration: 2, ease: 'easeOut' })
-      return controls.stop
-    }
-  }, [inView, count, to])
-
-  return <motion.span ref={ref}>{rounded}</motion.span>
-}
-
-const stats = [
-  { number: '500+', label: 'Websites Launched' },
-  { number: '10+', label: 'Years Experience' },
-  { number: '120+', label: 'Global Clients' },
-]
-
-const socials = [
-  {
-    name: 'Instagram',
-    url: 'https://www.instagram.com/nilebyte/',
-    color: '#E1306C',
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
-        <circle cx="12" cy="12" r="5" />
-        <circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none" />
-      </svg>
-    ),
-  },
-  {
-    name: 'LinkedIn',
-    url: 'https://www.linkedin.com/company/nilebyte/',
-    color: '#0077B5',
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-      </svg>
-    ),
-  },
-  {
-    name: 'Facebook',
-    url: 'https://www.facebook.com/nilebyte/',
-    color: '#1877F2',
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
-      </svg>
-    ),
-  },
-]
-
-const contacts = [
-  {
-    title: 'Location',
-    line1: 'New Cairo',
-    line2: 'Cairo, Egypt',
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-        <circle cx="12" cy="10" r="3" />
-      </svg>
-    )
-  },
-  {
-    title: 'Phone',
-    line1: '010 06224062',
-    line2: 'Mon-Fri, 9am - 6pm',
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
-      </svg>
-    )
-  },
-  {
-    title: 'Email',
-    line1: 'hello@nilebyte.com',
-    line2: '',
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-        <polyline points="22,6 12,13 2,6" />
-      </svg>
-    )
-  }
-]
-
-function useWindowWidth() {
-  const [width, setWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1200)
-  useEffect(() => {
-    const handleResize = () => setWidth(window.innerWidth)
+    const handleResize = () => setIsMobile(window.innerWidth < 1024)
+    handleResize()
     window.addEventListener('resize', handleResize)
     return () => window.removeEventListener('resize', handleResize)
   }, [])
-  return width
-}
 
-export default function About() {
-  const width = useWindowWidth()
-  const isMobile = width < 768
-  const isTablet = width < 1024
+  const avatars = [
+    'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop&crop=faces',
+    'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=faces',
+    'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=faces',
+    'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&crop=faces'
+  ]
+
+
 
   return (
     <section
       id="about"
       style={{
-        background: '#111110',
-        padding: isMobile ? '80px 0 100px' : '120px 0 140px',
-        position: 'relative',
-        overflow: 'hidden',
+        background: '#F5F7FA',
+        padding: isMobile ? '60px 0 80px' : '100px 0 120px',
+        color: '#111111',
+        fontFamily: 'var(--font-body)',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: isMobile ? '80px' : '120px',
       }}
     >
-      {/* Decorative glow */}
+      {/* ----------------- BLOCK 1: Trusted by 100 Million ----------------- */}
       <div
         style={{
-          position: 'absolute',
-          bottom: '-300px',
-          left: '-200px',
-          width: '700px',
-          height: '700px',
-          borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(226,255,0,0.03) 0%, transparent 70%)',
-          pointerEvents: 'none',
+          width: '100%',
+          maxWidth: '1200px',
+          margin: '0 auto',
+          padding: '0 24px',
+          display: 'flex',
+          flexDirection: isMobile ? 'column' : 'row',
+          alignItems: 'stretch',
+          gap: isMobile ? '60px' : '80px',
         }}
-      />
+      >
+        {/* Left Side: Stats & Intro */}
+        <div style={{ flex: 1.1, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+          <h2
+            style={{
+              fontFamily: 'var(--font-display)',
+              fontSize: 'clamp(32px, 4.5vw, 56px)',
+              fontWeight: 800,
+              lineHeight: 1.1,
+              color: '#000000',
+              margin: '0 0 20px 0',
+              letterSpacing: '-0.03em',
+            }}
+          >
+            Trusted by <br />
+            <span style={{ fontWeight: 300, color: '#888888' }}>100 Million</span> buyers
+          </h2>
 
-      <div style={{ maxWidth: '1400px', margin: '0 auto', padding: '0 5vw', position: 'relative' }}>
-        {/* Section Header — Text + Logo */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-80px' }}
-          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          style={{
-            marginBottom: isMobile ? '60px' : '100px',
-            display: 'flex',
-            flexDirection: isTablet ? 'column' : 'row',
-            alignItems: isTablet ? 'flex-start' : 'center',
-            justifyContent: 'space-between',
-            gap: isMobile ? '40px' : '80px',
-          }}
-        >
-          {/* Left Side: Text */}
-          <div style={{ flex: '1', minWidth: 0, maxWidth: isTablet ? '100%' : '850px' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '24px' }}>
-              <div
+          <p
+            style={{
+              fontSize: '15px',
+              lineHeight: 1.6,
+              color: '#666666',
+              margin: '0 0 32px 0',
+              maxWidth: '440px',
+            }}
+          >
+            Only we connects you directly to the person that knows the most about a property for sale, the listing agent.
+          </p>
+
+          {/* Overlapping Agent Avatars */}
+          <div style={{ display: 'flex', alignItems: 'center', marginBottom: '32px' }}>
+            {avatars.map((url, index) => (
+              <img
+                key={index}
+                src={url}
+                alt="Agent"
                 style={{
-                  width: '40px',
-                  height: '2px',
-                  background: 'var(--color-brand-yellow)',
+                  width: '44px',
+                  height: '44px',
+                  borderRadius: '50%',
+                  border: '3px solid #FFFFFF',
+                  boxShadow: '0 4px 10px rgba(0,0,0,0.08)',
+                  marginLeft: index === 0 ? '0' : '-12px',
+                  objectFit: 'cover',
                 }}
               />
-              <span
-                style={{
-                  fontFamily: 'var(--font-body)',
-                  fontSize: '14px',
-                  fontWeight: 600,
-                  letterSpacing: '0.15em',
-                  textTransform: 'uppercase',
-                  color: 'var(--color-brand-yellow)',
-                }}
-              >
-                About Us
-              </span>
-            </div>
-            <h2
-              style={{
-                fontFamily: 'var(--font-display)',
-                fontSize: isMobile ? 'clamp(24px, 7vw, 36px)' : 'clamp(32px, 4.5vw, 64px)',
-                fontWeight: 800,
-                lineHeight: 1.05,
-                letterSpacing: '-0.04em',
-                color: '#FFFFFF',
-                margin: '0 0 24px 0',
-                wordBreak: 'break-word',
-              }}
-            >
-              We don't just build websites.
-              <br />
-              We craft{' '}
-              <span style={{ color: 'var(--color-brand-yellow)' }}>digital experiences</span>.
-            </h2>
-            <p
-              style={{
-                fontFamily: 'var(--font-body)',
-                fontSize: isMobile ? '15px' : 'clamp(16px, 1.2vw, 20px)',
-                lineHeight: 1.6,
-                color: '#9A9A97',
-                margin: 0,
-                fontWeight: 400,
-              }}
-            >
-              NileByte is a full-service web design and development agency.
-              We transform ideas into stunning digital products — websites that captivate users,
-              drive growth, and stand the test of time.
-            </p>
+            ))}
           </div>
 
-          {/* Right Side: Logo */}
-          <motion.div
-            initial={{ opacity: 0, x: 40, scale: 0.95 }}
-            whileInView={{ opacity: 1, x: 0, scale: 1 }}
-            transition={{ duration: 1.5, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+          {/* Stat Numbers */}
+          <div style={{ display: 'flex', gap: '40px', marginTop: 'auto' }}>
+            <div>
+              <div style={{ fontSize: '24px', fontWeight: '800', color: '#000000' }}>100M</div>
+              <div style={{ fontSize: '13px', color: '#888888', marginTop: '4px' }}>Happy buyers</div>
+            </div>
+            <div>
+              <div style={{ fontSize: '24px', fontWeight: '800', color: '#000000' }}>40M</div>
+              <div style={{ fontSize: '13px', color: '#888888', marginTop: '4px' }}>Client review</div>
+            </div>
+            <div>
+              <div style={{ fontSize: '24px', fontWeight: '800', color: '#000000' }}>4.6</div>
+              <div style={{ fontSize: '13px', color: '#888888', marginTop: '4px' }}>Positive Rating</div>
+            </div>
+          </div>
+        </div>
+
+        {/* Middle Column: Vertical Divider Line */}
+        {!isMobile && (
+          <div
             style={{
-              flex: '0 0 auto',
-              width: isMobile ? '80%' : isTablet ? '50%' : 'clamp(240px, 24vw, 380px)',
-              margin: '0 auto',
+              width: '1px',
+              alignSelf: 'stretch',
+              background: '#000000',
+              opacity: 0.15,
+              margin: '0 10px',
+            }}
+          />
+        )}
+
+        {/* Right Side: Features/Cards List */}
+        <div style={{ flex: 1.2, display: 'flex', flexDirection: 'column', gap: '24px', justifyContent: 'center' }}>
+          {/* Card 1 */}
+          <div
+            style={{
+              background: '#FFFFFF',
+              border: '1px solid rgba(0,0,0,0.06)',
+              borderRadius: '24px',
+              padding: '24px 30px',
+              display: 'flex',
+              gap: '20px',
+              position: 'relative',
+              boxShadow: '0 4px 20px rgba(0,0,0,0.01)',
+              transition: 'all 0.3s ease',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.boxShadow = '0 12px 30px rgba(0,0,0,0.04)'
+              e.currentTarget.style.borderColor = 'rgba(59, 130, 246, 0.2)'
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.boxShadow = '0 4px 20px rgba(0,0,0,0.01)'
+              e.currentTarget.style.borderColor = 'rgba(0,0,0,0.06)'
             }}
           >
-            <div style={{
-              padding: '48px',
-              background: 'linear-gradient(145deg, rgba(226,255,0,0.08), rgba(226,255,0,0.02))',
-              borderRadius: '28px',
-              border: '1px solid rgba(226,255,0,0.15)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              boxShadow: '0 20px 40px rgba(0,0,0,0.2)',
-            }}>
-              <span style={{
-                fontFamily: 'var(--font-display)',
-                fontSize: 'clamp(36px, 5vw, 56px)',
-                fontWeight: 900,
-                color: '#FFFFFF',
-                letterSpacing: '-0.04em',
-                textAlign: 'center',
-              }}>Nile<span style={{ color: 'var(--color-brand-yellow)' }}>Byte</span></span>
+            {/* Blue Icon Circle */}
+            <div
+              style={{
+                width: '46px',
+                height: '46px',
+                borderRadius: '50%',
+                background: '#3B82F6',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                flexShrink: 0,
+              }}
+            >
+              {/* Compass Icon */}
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="10" />
+                <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" />
+              </svg>
             </div>
-          </motion.div>
-        </motion.div>
 
-        {/* Stats Row */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-60px' }}
-          transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+            {/* Text details */}
+            <div style={{ flex: 1, paddingRight: '40px' }}>
+              <h3
+                style={{
+                  fontFamily: 'var(--font-display)',
+                  fontSize: '18px',
+                  fontWeight: '700',
+                  color: '#000000',
+                  margin: '0 0 8px 0',
+                  lineHeight: 1.2,
+                }}
+              >
+                Explore <br />
+                <span style={{ fontWeight: '400', color: '#444444' }}>great neighborhoods</span>
+              </h3>
+              <p style={{ fontSize: '13px', lineHeight: 1.5, color: '#666666', margin: 0 }}>
+                Explore video tours, in-depth research, and articles on 20,000 neighborhoods.
+              </p>
+            </div>
+
+            {/* Bottom Right Arrow Button */}
+            <div
+              style={{
+                position: 'absolute',
+                bottom: '20px',
+                right: '20px',
+                width: '42px',
+                height: '28px',
+                borderRadius: '99px',
+                border: '1px solid rgba(0,0,0,0.06)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                background: '#FFFFFF',
+              }}
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#666666" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12" />
+                <polyline points="12 5 19 12 12 19" />
+              </svg>
+            </div>
+          </div>
+
+          {/* Card 2 */}
+          <div
+            style={{
+              background: '#FFFFFF',
+              border: '1px solid rgba(0,0,0,0.06)',
+              borderRadius: '24px',
+              padding: '24px 30px',
+              display: 'flex',
+              gap: '20px',
+              position: 'relative',
+              boxShadow: '0 4px 20px rgba(0,0,0,0.01)',
+              transition: 'all 0.3s ease',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.boxShadow = '0 12px 30px rgba(0,0,0,0.04)'
+              e.currentTarget.style.borderColor = 'rgba(59, 130, 246, 0.2)'
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.boxShadow = '0 4px 20px rgba(0,0,0,0.01)'
+              e.currentTarget.style.borderColor = 'rgba(0,0,0,0.06)'
+            }}
+          >
+            {/* Blue Icon Circle */}
+            <div
+              style={{
+                width: '46px',
+                height: '46px',
+                borderRadius: '50%',
+                background: '#3B82F6',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                flexShrink: 0,
+              }}
+            >
+              {/* Star Icon */}
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+              </svg>
+            </div>
+
+            {/* Text details */}
+            <div style={{ flex: 1, paddingRight: '40px' }}>
+              <h3
+                style={{
+                  fontFamily: 'var(--font-display)',
+                  fontSize: '18px',
+                  fontWeight: '700',
+                  color: '#000000',
+                  margin: '0 0 8px 0',
+                  lineHeight: 1.2,
+                }}
+              >
+                Find highly <br />
+                <span style={{ fontWeight: '400', color: '#444444' }}>rated best property</span>
+              </h3>
+              <p style={{ fontSize: '13px', lineHeight: 1.5, color: '#666666', margin: 0 }}>
+                Find the very best schools with in-depth reviews and ratings from multiple experts.
+              </p>
+            </div>
+
+            {/* Bottom Right Arrow Button */}
+            <div
+              style={{
+                position: 'absolute',
+                bottom: '20px',
+                right: '20px',
+                width: '42px',
+                height: '28px',
+                borderRadius: '99px',
+                border: '1px solid rgba(0,0,0,0.06)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                background: '#FFFFFF',
+              }}
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#666666" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12" />
+                <polyline points="12 5 19 12 12 19" />
+              </svg>
+            </div>
+          </div>
+
+          {/* Card 3 */}
+          <div
+            style={{
+              background: '#FFFFFF',
+              border: '1px solid rgba(0,0,0,0.06)',
+              borderRadius: '24px',
+              padding: '24px 30px',
+              display: 'flex',
+              gap: '20px',
+              position: 'relative',
+              boxShadow: '0 4px 20px rgba(0,0,0,0.01)',
+              transition: 'all 0.3s ease',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.boxShadow = '0 12px 30px rgba(0,0,0,0.04)'
+              e.currentTarget.style.borderColor = 'rgba(59, 130, 246, 0.2)'
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.boxShadow = '0 4px 20px rgba(0,0,0,0.01)'
+              e.currentTarget.style.borderColor = 'rgba(0,0,0,0.06)'
+            }}
+          >
+            {/* Blue Icon Circle */}
+            <div
+              style={{
+                width: '46px',
+                height: '46px',
+                borderRadius: '50%',
+                background: '#3B82F6',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                flexShrink: 0,
+              }}
+            >
+              {/* Apartment Building Icon */}
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="4" y="2" width="16" height="20" rx="2" ry="2" />
+                <line x1="9" y1="22" x2="9" y2="16" />
+                <line x1="15" y1="22" x2="15" y2="16" />
+                <line x1="9" y1="16" x2="15" y2="16" />
+                <path d="M9 6h.01" />
+                <path d="M15 6h.01" />
+                <path d="M9 11h.01" />
+                <path d="M15 11h.01" />
+              </svg>
+            </div>
+
+            {/* Text details */}
+            <div style={{ flex: 1, paddingRight: '40px' }}>
+              <h3
+                style={{
+                  fontFamily: 'var(--font-display)',
+                  fontSize: '18px',
+                  fontWeight: '700',
+                  color: '#000000',
+                  margin: '0 0 8px 0',
+                  lineHeight: 1.2,
+                }}
+              >
+                Discover <br />
+                <span style={{ fontWeight: '400', color: '#444444' }}>condo quality buildings</span>
+              </h3>
+              <p style={{ fontSize: '13px', lineHeight: 1.5, color: '#666666', margin: 0 }}>
+                Explore video tours, in-depth research, and articles on 20,000 neighborhoods.
+              </p>
+            </div>
+
+            {/* Bottom Right Arrow Button */}
+            <div
+              style={{
+                position: 'absolute',
+                bottom: '20px',
+                right: '20px',
+                width: '42px',
+                height: '28px',
+                borderRadius: '99px',
+                border: '1px solid rgba(0,0,0,0.06)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                background: '#FFFFFF',
+              }}
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#666666" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12" />
+                <polyline points="12 5 19 12 12 19" />
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* ----------------- BLOCK 2: Developed Landmark Projects ----------------- */}
+      <div
+        style={{
+          width: '100%',
+          maxWidth: '1200px',
+          margin: '0 auto',
+          padding: '0 24px',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '40px',
+        }}
+      >
+        {/* Header Section */}
+        <div
           style={{
-            display: 'grid',
-            gridTemplateColumns: isMobile ? 'repeat(1, 1fr)' : 'repeat(3, 1fr)',
-            gap: isMobile ? '40px' : '24px',
-            marginBottom: isMobile ? '60px' : '100px',
-            padding: isMobile ? '40px 24px' : '48px 40px',
-            background: 'rgba(255,255,255,0.02)',
-            border: '1px solid rgba(255,255,255,0.06)',
-            borderRadius: '20px',
+            display: 'flex',
+            flexDirection: isMobile ? 'column' : 'row',
+            alignItems: isMobile ? 'flex-start' : 'center',
+            gap: isMobile ? '16px' : '40px',
           }}
         >
-          {stats.map((stat, index) => (
-            <div key={stat.label} style={{ position: 'relative' }}>
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.15 + index * 0.1 }}
-                style={{ textAlign: 'center' }}
-              >
-                <div
-                  style={{
-                    fontFamily: 'var(--font-display)',
-                    fontSize: isMobile ? 'clamp(36px, 10vw, 48px)' : 'clamp(40px, 5vw, 64px)',
-                    fontWeight: 800,
-                    color: '#FFFFFF',
-                    lineHeight: 1,
-                    marginBottom: '12px',
-                    letterSpacing: '-0.03em',
-                  }}
-                >
-                  <Counter from={0} to={parseInt(stat.number.replace('+', ''))} />
-                  {stat.number.includes('+') && <span style={{ color: 'var(--color-brand-yellow)' }}>+</span>}
-                </div>
-                <div
-                  style={{
-                    fontFamily: 'var(--font-body)',
-                    fontSize: isMobile ? '14px' : '16px',
-                    fontWeight: 600,
-                    color: '#FFFFFF',
-                    letterSpacing: '0.05em',
-                    textTransform: 'uppercase',
-                  }}
-                >
-                  {stat.label}
-                </div>
-              </motion.div>
-
-              {/* Vertical divider line for desktop */}
-              {!isMobile && index < stats.length - 1 && (
-                <div style={{
-                  position: 'absolute',
-                  top: '10%',
-                  bottom: '10%',
-                  right: '-12px', /* center of 24px gap */
-                  width: '1px',
-                  background: 'linear-gradient(to bottom, transparent, rgba(255,255,255,0.15), transparent)'
-                }} />
-              )}
-              {/* Horizontal divider line for mobile */}
-              {isMobile && index < stats.length - 1 && (
-                <div style={{
-                  position: 'absolute',
-                  left: '20%',
-                  right: '20%',
-                  bottom: '-20px', /* center of 40px gap */
-                  height: '1px',
-                  background: 'linear-gradient(to right, transparent, rgba(255,255,255,0.15), transparent)'
-                }} />
-              )}
-            </div>
-          ))}
-        </motion.div>
-
-        {/* Contact Information Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-60px' }}
-          transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-          style={{ marginBottom: isMobile ? '60px' : '100px' }}
-        >
-          <h3
-            style={{
-              fontFamily: 'var(--font-display)',
-              fontSize: isMobile ? 'clamp(20px, 6vw, 28px)' : 'clamp(24px, 3vw, 36px)',
-              fontWeight: 700,
-              color: '#FFFFFF',
-              marginBottom: isMobile ? '32px' : '48px',
-              letterSpacing: '-0.02em',
-              textAlign: 'center',
-            }}
-          >
-            Contact Us
-          </h3>
-
+          {/* Tag Pill on Left */}
           <div
             style={{
-              display: 'grid',
-              gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)',
-              gap: isMobile ? '16px' : '32px',
+              padding: '6px 14px',
+              background: '#EAEAEA',
+              borderRadius: '99px',
+              fontSize: '11px',
+              fontWeight: '700',
+              color: '#333333',
+              letterSpacing: '0.05em',
+              textTransform: 'uppercase',
+              whiteSpace: 'nowrap',
             }}
           >
-            {contacts.map((contact, i) => (
-              <motion.div
-                key={contact.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.2 + i * 0.1 }}
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'flex-start',
-                  padding: isMobile ? '24px' : '40px 32px',
-                  background: 'linear-gradient(145deg, rgba(255,255,255,0.02), rgba(255,255,255,0.005))',
-                  border: '1px solid rgba(255,255,255,0.04)',
-                  borderRadius: '24px',
-                  position: 'relative',
-                  overflow: 'hidden',
-                  transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
-                  cursor: 'pointer',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = 'rgba(226,255,0,0.3)'
-                  e.currentTarget.style.background = 'linear-gradient(145deg, rgba(226,255,0,0.05), rgba(226,255,0,0.01))'
-                  e.currentTarget.style.transform = 'translateY(-6px)'
-                  e.currentTarget.style.boxShadow = '0 12px 40px rgba(226,255,0,0.06)'
-                  const iconwrap = e.currentTarget.querySelector('.contact-icon')
-                  if (iconwrap) iconwrap.style.color = 'var(--color-brand-yellow)'
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = 'rgba(255,255,255,0.04)'
-                  e.currentTarget.style.background = 'linear-gradient(145deg, rgba(255,255,255,0.02), rgba(255,255,255,0.005))'
-                  e.currentTarget.style.transform = 'translateY(0)'
-                  e.currentTarget.style.boxShadow = 'none'
-                  const iconwrap = e.currentTarget.querySelector('.contact-icon')
-                  if (iconwrap) iconwrap.style.color = '#FFFFFF'
-                }}
-              >
-                <div
-                  className="contact-icon"
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    width: '48px',
-                    height: '48px',
-                    background: 'rgba(255,255,255,0.05)',
-                    borderRadius: '12px',
-                    color: '#FFFFFF',
-                    marginBottom: '24px',
-                    transition: 'color 0.4s ease',
-                  }}
-                >
-                  {contact.icon}
-                </div>
-
-                <h4 style={{ fontFamily: 'var(--font-display)', fontSize: '20px', fontWeight: 700, color: '#FFFFFF', marginBottom: '12px', letterSpacing: '0.01em' }}>
-                  {contact.title}
-                </h4>
-                <p style={{ fontFamily: 'var(--font-body)', fontSize: '15px', color: '#9A9A97', lineHeight: 1.6, margin: 0 }}>
-                  <span style={{ color: '#E0E0D8' }}>{contact.line1}</span><br />
-                  {contact.line2}
-                </p>
-              </motion.div>
-            ))}
+            Who We Are -
           </div>
-        </motion.div>
 
-        {/* Social Media Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-60px' }}
-          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          style={{ textAlign: 'center' }}
-        >
-          <h3
+          {/* Heading */}
+          <h2
             style={{
               fontFamily: 'var(--font-display)',
-              fontSize: isMobile ? 'clamp(20px, 6vw, 28px)' : 'clamp(24px, 3vw, 36px)',
-              fontWeight: 700,
-              color: '#FFFFFF',
-              marginBottom: isMobile ? '32px' : '48px',
-              letterSpacing: '-0.02em',
+              fontSize: 'clamp(28px, 3.5vw, 44px)',
+              fontWeight: 800,
+              lineHeight: 1.15,
+              color: '#000000',
+              margin: 0,
+              letterSpacing: '-0.03em',
             }}
           >
-            Follow Us on Social Media
-          </h3>
+            We developed landmark <br />
+            real estate projects
+          </h2>
+        </div>
 
+        {/* 3-Cards Grid */}
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)',
+            gap: '24px',
+          }}
+        >
+          {/* Card 01: What We Do (Olive Green Dark Card) */}
           <div
             style={{
+              background: '#1F2421',
+              borderRadius: '32px',
+              padding: '40px',
+              position: 'relative',
+              overflow: 'hidden',
+              minHeight: '400px',
               display: 'flex',
-              justifyContent: 'center',
-              gap: isMobile ? '16px' : '24px',
-              flexWrap: 'wrap',
+              flexDirection: 'column',
+              boxShadow: '0 8px 30px rgba(0,0,0,0.05)',
+              transition: 'transform 0.3s ease',
             }}
+            onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-6px)' }}
+            onMouseLeave={(e) => { e.currentTarget.style.transform = 'translateY(0)' }}
           >
-            {socials.map((social, index) => (
-              <motion.a
-                key={social.name}
-                href={social.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.1 + index * 0.1 }}
+            <div style={{ fontSize: '13px', color: 'rgba(255,255,255,0.4)', fontWeight: '600' }}>01.</div>
+            <div style={{ height: '1px', background: 'rgba(255,255,255,0.1)', margin: '12px 0 32px' }} />
+            
+            <h3 style={{ fontFamily: 'var(--font-display)', fontSize: '26px', fontWeight: '800', color: '#FFFFFF', margin: '0 0 16px 0' }}>
+              What we do
+            </h3>
+            <p style={{ fontSize: '14px', lineHeight: 1.6, color: 'rgba(255,255,255,0.7)', margin: 0 }}>
+              We maintain this by ensuring transparency and professional conduct in every aspect.
+            </p>
+
+            <div style={{ marginTop: 'auto', display: 'flex', alignItems: 'center' }}>
+              <span
                 style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '14px',
-                  padding: isMobile ? '16px 24px' : '20px 32px',
-                  background: 'rgba(255,255,255,0.03)',
-                  border: '1px solid rgba(255,255,255,0.08)',
-                  borderRadius: '16px',
-                  color: '#9A9A97',
-                  textDecoration: 'none',
-                  fontFamily: 'var(--font-body)',
-                  fontSize: isMobile ? '14px' : '16px',
-                  fontWeight: 500,
-                  letterSpacing: '0.02em',
-                  transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
+                  fontSize: '14px',
+                  fontWeight: '600',
+                  color: '#FFFFFF',
+                  textDecoration: 'underline',
                   cursor: 'pointer',
-                  minWidth: isMobile ? 'auto' : '180px',
-                  justifyContent: 'center',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = social.color
-                  e.currentTarget.style.background = 'rgba(255,255,255,0.05)'
-                  e.currentTarget.style.color = '#FFFFFF'
-                  e.currentTarget.style.transform = 'translateY(-4px)'
-                  e.currentTarget.style.boxShadow = `0 8px 30px ${social.color}33`
-                  const iconSpan = e.currentTarget.querySelector('.social-icon')
-                  if (iconSpan) iconSpan.style.color = social.color
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)'
-                  e.currentTarget.style.background = 'rgba(255,255,255,0.03)'
-                  e.currentTarget.style.color = '#9A9A97'
-                  e.currentTarget.style.transform = 'translateY(0)'
-                  e.currentTarget.style.boxShadow = 'none'
-                  const iconSpan = e.currentTarget.querySelector('.social-icon')
-                  if (iconSpan) iconSpan.style.color = 'inherit'
                 }}
               >
-                <span className="social-icon" style={{ display: 'flex', alignItems: 'center', flexShrink: 0, transition: 'color 0.4s ease' }}>
-                  {social.icon}
-                </span>
-                <span>{social.name}</span>
-              </motion.a>
-            ))}
+                Our Solutions
+              </span>
+            </div>
+
+            {/* Corner Icon Button */}
+            <div
+              style={{
+                position: 'absolute',
+                bottom: '20px',
+                right: '20px',
+                width: '42px',
+                height: '42px',
+                borderRadius: '50%',
+                background: '#3B82F6',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="7" y1="17" x2="17" y2="7" />
+                <polyline points="7 7 17 7 17 17" />
+              </svg>
+            </div>
           </div>
-        </motion.div>
+
+          {/* Card 02: Our Impact (Lime Green Card with embedded architectural render at bottom) */}
+          <div
+            style={{
+              background: '#D4E755',
+              borderRadius: '32px',
+              padding: '40px 40px 180px 40px', // Extra bottom padding for overlap image
+              position: 'relative',
+              overflow: 'hidden',
+              minHeight: '400px',
+              display: 'flex',
+              flexDirection: 'column',
+              boxShadow: '0 8px 30px rgba(0,0,0,0.05)',
+              transition: 'transform 0.3s ease',
+            }}
+            onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-6px)' }}
+            onMouseLeave={(e) => { e.currentTarget.style.transform = 'translateY(0)' }}
+          >
+            <div style={{ fontSize: '13px', color: 'rgba(31,36,33,0.4)', fontWeight: '600' }}>02.</div>
+            <div style={{ height: '1px', background: 'rgba(31,36,33,0.1)', margin: '12px 0 32px' }} />
+
+            <h3 style={{ fontFamily: 'var(--font-display)', fontSize: '26px', fontWeight: '800', color: '#1F2421', margin: '0 0 16px 0' }}>
+              Our impact
+            </h3>
+            <p style={{ fontSize: '14px', lineHeight: 1.6, color: 'rgba(31,36,33,0.8)', margin: '0 0 20px 0' }}>
+              We work with both investors and developers to create landmarks that make an impact.
+            </p>
+
+            <span
+              style={{
+                fontSize: '14px',
+                fontWeight: '600',
+                color: '#1F2421',
+                textDecoration: 'underline',
+                cursor: 'pointer',
+              }}
+            >
+              See Projects
+            </span>
+
+            {/* Skyscraper Image Layer at Bottom */}
+            <img
+              src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=500&h=350&fit=crop"
+              alt="Skyscraper Building"
+              style={{
+                position: 'absolute',
+                bottom: 0,
+                left: 0,
+                width: '100%',
+                height: '160px',
+                objectFit: 'cover',
+              }}
+            />
+
+            {/* Corner Icon Button */}
+            <div
+              style={{
+                position: 'absolute',
+                bottom: '20px',
+                right: '20px',
+                width: '42px',
+                height: '42px',
+                borderRadius: '50%',
+                background: '#FFFFFF',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                boxShadow: '0 4px 10px rgba(0,0,0,0.1)',
+                zIndex: 2,
+              }}
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1F2421" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="7" y1="17" x2="17" y2="7" />
+                <polyline points="7 7 17 7 17 17" />
+              </svg>
+            </div>
+          </div>
+
+          {/* Card 03: Core Values (Full Image Card with Dark Overlay) */}
+          <div
+            style={{
+              borderRadius: '32px',
+              padding: '40px',
+              position: 'relative',
+              overflow: 'hidden',
+              minHeight: '400px',
+              display: 'flex',
+              flexDirection: 'column',
+              boxShadow: '0 8px 30px rgba(0,0,0,0.05)',
+              transition: 'transform 0.3s ease',
+            }}
+            onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-6px)' }}
+            onMouseLeave={(e) => { e.currentTarget.style.transform = 'translateY(0)' }}
+          >
+            {/* Background Image */}
+            <img
+              src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&h=600&fit=crop"
+              alt="Luxury House rendering"
+              style={{
+                position: 'absolute',
+                inset: 0,
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+                zIndex: 0,
+              }}
+            />
+
+            {/* Dark overlay */}
+            <div
+              style={{
+                position: 'absolute',
+                inset: 0,
+                background: 'rgba(31,36,33,0.72)',
+                zIndex: 1,
+              }}
+            />
+
+            {/* Content Container (sitting above images/overlay) */}
+            <div style={{ position: 'relative', zIndex: 2, height: '100%', display: 'flex', flexDirection: 'column', flex: 1 }}>
+              <div style={{ fontSize: '13px', color: 'rgba(255,255,255,0.4)', fontWeight: '600' }}>03.</div>
+              <div style={{ height: '1px', background: 'rgba(255,255,255,0.1)', margin: '12px 0 32px' }} />
+
+              <h3 style={{ fontFamily: 'var(--font-display)', fontSize: '26px', fontWeight: '800', color: '#FFFFFF', margin: '0 0 16px 0' }}>
+                Core values
+              </h3>
+              <p style={{ fontSize: '14px', lineHeight: 1.6, color: 'rgba(255,255,255,0.7)', margin: 0 }}>
+                To empower clients with cutting-edge architectural designs and sustainable build quality that enhances their living experience.
+              </p>
+
+              <div style={{ marginTop: 'auto', display: 'flex', alignItems: 'center' }}>
+                <span
+                  style={{
+                    fontSize: '14px',
+                    fontWeight: '600',
+                    color: '#FFFFFF',
+                    textDecoration: 'underline',
+                    cursor: 'pointer',
+                  }}
+                >
+                  Discover More
+                </span>
+              </div>
+            </div>
+
+            {/* Corner Icon Button */}
+            <div
+              style={{
+                position: 'absolute',
+                bottom: '20px',
+                right: '20px',
+                width: '42px',
+                height: '42px',
+                borderRadius: '50%',
+                background: '#3B82F6',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                zIndex: 2,
+              }}
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="7" y1="17" x2="17" y2="7" />
+                <polyline points="7 7 17 7 17 17" />
+              </svg>
+            </div>
+          </div>
+        </div>
+
       </div>
     </section>
   )

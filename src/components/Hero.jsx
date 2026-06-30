@@ -262,16 +262,23 @@ export default function Hero() {
               color: '#FFFFFF',
             }}
           >
-            Design your{' '}
-            <span
-              style={{
-                color: 'var(--color-brand-yellow)',
-                fontWeight: 900,
-              }}
-            >
-              futuristic website
-            </span>
+            Design your futuristic website
           </h1>
+
+          <p
+            style={{
+              fontFamily: 'var(--font-body)',
+              fontSize: 'clamp(14px, 1.8vw, 18px)',
+              lineHeight: 1.6,
+              color: 'rgba(255, 255, 255, 0.75)',
+              maxWidth: '600px',
+              marginBottom: '32px',
+              textAlign: 'center',
+              margin: '0 auto 32px',
+            }}
+          >
+            Redefining the art of modern luxury and digital co-ownership.
+          </p>
 
           {/* ---- CTA Button — smaller, pill-shaped, like reference ---- */}
           <a
@@ -290,16 +297,16 @@ export default function Hero() {
               fontWeight: 500,
               textDecoration: 'none',
               letterSpacing: '0.02em',
-              boxShadow: '0 0 16px rgba(226, 255, 0, 0.45)',
+              boxShadow: '0 0 16px rgba(59, 130, 246, 0.45)',
               transition: 'transform 0.2s ease, box-shadow 0.2s ease',
             }}
             onMouseEnter={(e) => {
               e.currentTarget.style.transform = 'translateY(-1px)'
-              e.currentTarget.style.boxShadow = '0 0 24px rgba(226, 255, 0, 0.7)'
+              e.currentTarget.style.boxShadow = '0 0 24px rgba(59, 130, 246, 0.7)'
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.transform = 'translateY(0)'
-              e.currentTarget.style.boxShadow = '0 0 16px rgba(226, 255, 0, 0.45)'
+              e.currentTarget.style.boxShadow = '0 0 16px rgba(59, 130, 246, 0.45)'
             }}
           >
             Explore Our Work{' '}
@@ -308,7 +315,7 @@ export default function Hero() {
               height="14"
               viewBox="0 0 24 24"
               fill="none"
-              stroke="var(--color-brand-yellow)"
+              stroke="var(--color-brand-blue)"
               strokeWidth="2.5"
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -342,7 +349,7 @@ export default function Hero() {
             }}>
               <text
                 x="50%"
-                y={`${thdTextYPercentFinal - 8}%`}
+                y={`${thdTextYPercentFinal}%`}
                 textAnchor="middle"
                 dominantBaseline="central"
                 fill="none"
@@ -359,25 +366,6 @@ export default function Hero() {
                 }}
               >
                 NileByte
-              </text>
-              <text
-                x="50%"
-                y={`${thdTextYPercentFinal + (isMobile ? 3 : 20)}%`}
-                textAnchor="middle"
-                dominantBaseline="central"
-                fill="none"
-                stroke="rgba(255, 255, 255, 0.75)"
-                strokeWidth={1.5 / thdScale}
-                pathLength="100"
-                strokeDasharray="100"
-                strokeDashoffset={`${100 - (strokeDrawT * 100)}`}
-                style={{
-                  fontFamily: 'var(--font-display)',
-                  fontSize: 'clamp(4rem, 10vw, 9rem)',
-                  fontWeight: 600,
-                }}
-              >
-                Intelligence
               </text>
             </g>
           </svg>
@@ -405,7 +393,7 @@ export default function Hero() {
                 }}>
                   <text
                     x="50%"
-                    y={`${thdTextYPercentFinal - 8}%`}
+                    y={`${thdTextYPercentFinal}%`}
                     textAnchor="middle"
                     dominantBaseline="central"
                     fill="black"
@@ -418,21 +406,6 @@ export default function Hero() {
                     }}
                   >
                     NileByte
-                  </text>
-                  <text
-                    x="50%"
-                    y={`${thdTextYPercentFinal + (isMobile ? 3 : 20)}%`}
-                    textAnchor="middle"
-                    dominantBaseline="central"
-                    fill="black"
-                    opacity={1 - dropT}
-                    style={{
-                      fontFamily: 'var(--font-display)',
-                      fontSize: 'clamp(4rem, 10vw, 9rem)',
-                      fontWeight: 600,
-                    }}
-                  >
-                    Intelligence
                   </text>
                 </g>
               </mask>
@@ -448,7 +421,7 @@ export default function Hero() {
             }}>
               <text
                 x="50%"
-                y={`${thdTextYPercentFinal - 8}%`}
+                y={`${thdTextYPercentFinal}%`}
                 textAnchor="middle"
                 dominantBaseline="central"
                 fill="#FFFFFF"
@@ -460,20 +433,6 @@ export default function Hero() {
                 }}
               >
                 NileByte
-              </text>
-              <text
-                x="50%"
-                y={`${thdTextYPercentFinal + (isMobile ? 3 : 20)}%`}
-                textAnchor="middle"
-                dominantBaseline="central"
-                fill="var(--color-brand-yellow)"
-                style={{
-                  fontFamily: 'var(--font-display)',
-                  fontSize: 'clamp(4rem, 10vw, 9rem)',
-                  fontWeight: 600,
-                }}
-              >
-                Intelligence
               </text>
             </g>
           </svg>

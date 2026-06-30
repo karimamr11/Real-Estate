@@ -35,7 +35,7 @@ export default function Services() {
           width: '600px',
           height: '600px',
           borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(226,255,0,0.04) 0%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(59,130,246,0.04) 0%, transparent 70%)',
           pointerEvents: 'none',
         }}
       />
@@ -47,7 +47,7 @@ export default function Services() {
           width: '400px',
           height: '400px',
           borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(226,255,0,0.03) 0%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(59,130,246,0.03) 0%, transparent 70%)',
           pointerEvents: 'none',
         }}
       />
@@ -66,7 +66,7 @@ export default function Services() {
               style={{
                 width: '40px',
                 height: '2px',
-                background: 'var(--color-brand-yellow)',
+                background: 'var(--color-brand-blue)',
               }}
             />
             <span
@@ -76,7 +76,7 @@ export default function Services() {
                 fontWeight: 600,
                 letterSpacing: '0.15em',
                 textTransform: 'uppercase',
-                color: 'var(--color-brand-yellow)',
+                color: 'var(--color-brand-blue)',
               }}
             >
               What We Do
@@ -95,7 +95,7 @@ export default function Services() {
             }}
           >
             Services built for{' '}
-            <span style={{ color: 'var(--color-brand-yellow)' }}>vision</span>.
+            <span style={{ color: 'var(--color-brand-blue)' }}>vision</span>.
           </h2>
         </motion.div>
 
@@ -126,11 +126,11 @@ export default function Services() {
               className="services-row"
               onMouseEnter={(e) => {
                 e.currentTarget.style.background = 'rgba(255,255,255,0.03)'
-                e.currentTarget.style.borderColor = 'rgba(226,255,0,0.25)'
+                e.currentTarget.style.borderColor = 'rgba(59,130,246,0.25)'
                 e.currentTarget.style.boxShadow = '0 12px 40px rgba(0,0,0,0.2)'
                 e.currentTarget.style.transform = 'translateY(-6px)'
                 const num = e.currentTarget.querySelector('.service-num')
-                if (num) num.style.color = 'var(--color-brand-yellow)'
+                if (num) num.style.color = 'var(--color-brand-blue)'
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.background = 'rgba(255,255,255,0.015)'

@@ -2,8 +2,9 @@ import './App.css'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import Projects from './components/Projects'
-import Services from './components/Services'
+import ShowcaseVideo from './components/ShowcaseVideo'
 import About from './components/About'
+import Contact from './components/Contact'
 import Footer from './components/Footer'
 
 function App() {
@@ -13,8 +14,9 @@ function App() {
       <main>
         <Hero />
         <Projects />
-        <Services />
+        <ShowcaseVideo />
         <About />
+        <Contact />
       </main>
       <Footer />
     </div>
